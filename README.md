@@ -1,8 +1,8 @@
-- 👋 Hi, I’m @Frihk
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+👋 Hi, I’m @Frihk
+👀 I’m interested in coding to help hone my skills in it
+🌱 I’m currently learning software engeneering
+📫 How to reach me ,,, just text me
+
 
 <!---
 Frihk/Frihk is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
