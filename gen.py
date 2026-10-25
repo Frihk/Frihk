@@ -50,56 +50,24 @@ PAUSE_AFTER_CMD = 0.45  # extra pause before output begins
 SCRIPT = [
     {
         "type": "cmd",
-        "text": "curl -s https://frihk.dev/avatar.ascii | head -n 12",
+        "text": "cat ~/portrait.txt",
     },
-    {
-        "type": "out",
-        "text": "[dim]      =*%@@@@@%*-       [/dim]  [teal]Ian Kimani[/teal] [dim](frihk)[/dim]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]    *%#+-::::-+*##-     [/dim]  [dim]title  :[/dim] [text]junior software developer[/text]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]   #%*+=:....:---+%     [/dim]  [dim]loc    :[/dim] [amber]Kisumu, Kenya[/amber] [dim][0.09°S, 34.76°E][/dim]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]   %#*++=----=====-     [/dim]  [dim]origin :[/dim] Physics -> Backend engineering",
-    },
-    {
-        "type": "out",
-        "text": "[dim]   %@@@@%%##@@@%%#+     [/dim]  [dim]cohort :[/dim] Zone01 bootcamp",
-    },
-    {
-        "type": "out",
-        "text": "[dim]  .@@@@@@@-+@@@%##+     [/dim]  [dim]focus  :[/dim] AI data labeling / annotation ops",
-    },
-    {
-        "type": "out",
-        "text": "[dim]   *@##*#*:-+****+=     [/dim]  [dim]stack  :[/dim] [teal]Go[/teal], [teal]Python[/teal], [text]JS, React, Next.js[/text]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]    *@%+*@@@%*+##*      [/dim]  [dim]hiring :[/dim] [amber]OPEN[/amber] [dim]for junior roles & collabs[/dim]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]     #@@@@%%%%@%%=      [/dim]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]    .@@@@@@@@@@@%@*     [/dim]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]    .*@@@@@@@@@@@@:     [/dim]",
-    },
-    {
-        "type": "out",
-        "text": "[dim]  ..: *@@@@@@@@@@-      [/dim]",
-    },
+    {"type": "out", "text": "[dim]  ^%%^:%@%^^%^_````_``^^^%@@@@@@@@@@Z@@%^_______,,,,Z%<Z@Z@@[/dim]"},
+    {"type": "out", "text": "[dim]  |Z%^Z@*^^^``````````~._````____________         ^^^-~<>,^%[/dim]"},
+    {"type": "out", "text": "[dim]  J%@/`-^^^``________      ```^^^^^^^`^`      ________`_^^^%[/dim]"},
+    {"type": "out", "text": "[dim]  __2 -`     `__,,Z_``       ___,;;__'       ```_,,___````-^[/dim]"},
+    {"type": "out", "text": "[dim]  ?%\\.`      `````` `        ^^^ZZZ^^`              _`^~___:[/dim]"},
+    {"type": "out", "text": "[dim] ~~~,:__     _@C  `  z__ -_  ::@@@@@C_  .   _@_   `_S@_____:[/dim]"},
+    {"type": "out", "text": "[dim]  _^C`______ .^%;___;7^^,,   _^@@@@@%_ _ ..__^%___z@F^-^:;:%[/dim]"},
+    {"type": "out", "text": "[dim]  `^@ :_:%;:_ `^^^~^^^``__`__:@@@@@@@%>`::___`^^^^``__<%%%@%[/dim]"},
+    {"type": "out", "text": "[dim]  _ @L-_Z@@%;__    ___:%%^_`_@@@@@@@@@^%_%%^^:__  ___:%@@@@@[/dim]"},
+    {"type": "out", "text": "[dim]  @;Z/:^ZZ@@%%%::_..-_:/_/^_@@@@@@@@@@@/Z%_%@:^:::_:%@@@@@F,[/dim]"},
+    {"type": "out", "text": "[dim]  ZCJL`%,^Z@@%%^;:__>^,@%^_@@@@@@@@@@@@@%ZZ@,^%%;;%%Z@ZF^u@@[/dim]"},
+    {"type": "out", "text": "[dim]  ^@@C::^^%>ZZZZZZu@@@@Z%_@@@@@@@@@@@@@@@@%@@@@@@@@<@@%ZZ@@@[/dim]"},
+    {"type": "out", "text": "[dim]   ^^S_`^%%%%@@@@@@@@@S%_@@@@@@@@@@@@@@@@@@^%@@@@@@@@@ZZ%%Z%[/dim]"},
+    {"type": "out", "text": "[dim]   ;:?C_`:^%%%@@@@@@@@@@@@@@Z%@@@@@@ZZZ@@@@@%@@%ZZ@@@@@%@Z%%[/dim]"},
+    {"type": "out", "text": "[dim]    ~~%__-_^%%%%%Z@@@@@C%%^^^`^%%Z@%%^^^^^%%@@@@@@%@%%%%%%%%[/dim]"},
+    {"type": "out", "text": "[dim]      ^%_-_^^^%%@@@@@@@@_       ^^^^_-~~` _@@@@@@@%%%%%%%%%%[/dim]"},
     {
         "type": "blank",
         "text": "",
