@@ -6,12 +6,10 @@
 <pattern id="sc" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" opacity="0.22"/></pattern>
 <clipPath id="reveal"><rect id="reveal-rect" x="0" y="51.92" width="880" height="786.60"/></clipPath></defs>
 <style>text{font-family:ui-monospace,'SF Mono',Menlo,'DejaVu Sans Mono','Courier New',monospace;font-size:6.31px;white-space:pre}.t{font-size:12px;fill:#6b7fa8}.c0{fill:#2f64e8}.c1{fill:#4a8cff}.c2{fill:#6eb0ff}.c3{fill:#93c8ff}.c4{fill:#c2e0ff}@keyframes p{from{opacity:0}to{opacity:1}}@keyframes sweep{0%{transform:translateY(0);opacity:0}6%{opacity:.6}94%{opacity:.6}100%{transform:translateY(786.6px);opacity:0}}.s{animation:sweep 3.24s linear both}.r{animation:p .25s ease-out both}/*PORTRAIT-ANIM*/
-@keyframes reveal{0%,2.747%{transform:scaleY(0)}54.670%,100%{transform:scaleY(1)}}
-@keyframes fade{0%,95.879%{opacity:1}100%{opacity:0}}
-@keyframes sweep{0%,2.747%{transform:translateY(0);opacity:0}3.091%{opacity:.7}54.670%{transform:translateY(779.32px);opacity:.7}56.731%,100%{transform:translateY(779.32px);opacity:0}}
-#reveal-rect{transform-origin:0 51.92px;animation:reveal 14.56s steps(108,end) infinite}
-#art{animation:fade 14.56s linear infinite}
-.s{animation:sweep 14.56s linear infinite}
+@keyframes reveal{0%,4.785%{transform:scaleY(0)}95.215%,100%{transform:scaleY(1)}}
+@keyframes sweep{0%,4.785%{transform:translateY(0);opacity:0}5.383%{opacity:.7}95.215%{transform:translateY(779.32px);opacity:.7}100%{transform:translateY(779.32px);opacity:0}}
+#reveal-rect{transform-origin:0 51.92px;animation:reveal 8.36s steps(108,end) 1 both}
+.s{animation:sweep 8.36s linear 1 both}
 /*END*/</style>
 <rect x="0.5" y="0.5" width="879" height="869" rx="12" fill="url(#g)" stroke="#1c2740"/>
 <path d="M0.5 12.5a12 12 0 0 1 12-12h855a12 12 0 0 1 12 12V40H0.5z" fill="#0d1320"/>
