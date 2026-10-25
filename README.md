@@ -1,12 +1,17 @@
-<div align="center">
+<h1 align="center">Ian Kimani</h1>
 
-# Ian Kimani
+<p align="center">
+  <code>junior software developer</code> &bull; <code>kisumu, kenya</code> &bull; <code>physicist by training</code>
+</p>
 
-`junior software developer` &bull; `kisumu, kenya` &bull; `physicist by training`
+<table width="100%">
+<tr>
+<td width="50%" valign="middle" align="center">
 
-</div>
+<img src="./portrait.svg" width="100%" alt="ASCII-art portrait of Ian Kimani: a young man with short hair and aviator-style glasses, looking straight at the camera." />
 
-<br>
+</td>
+<td width="50%" valign="middle">
 
 I'm **Ian Kimani**, a software developer in Kisumu, Kenya, with a physicist's discipline: I break problems into measurable pieces, test each, and ship what holds up. Backend-focused in Go, JavaScript, and Python, and fluent in React and Next.js, I build complete products.
 
@@ -14,9 +19,9 @@ Don't take my word for it, read the code. **Detecto** counts people in live vide
 
 I trained at Zone01, a peer-driven, project-based bootcamp in the 01 Edu network, where there is no teacher at the front of the room. You learn by building, getting stuck, and working it out with the people around you. I'm also part of the Mastercard Foundation Associates Program, implemented by Shortlist Futures in East Africa.
 
-<div align="center">
-  <img src="./portrait.svg" alt="ASCII-art portrait of Ian Kimani: a young man with short hair and aviator-style glasses, looking straight at the camera." width="820" />
-</div>
+</td>
+</tr>
+</table>
 
 <p align="center">
   <sub>ian kimani &bull; kisumu, kenya &bull; <a href="https://github.com/frihk">github.com/frihk</a></sub>
