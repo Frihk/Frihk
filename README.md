@@ -1,35 +1,35 @@
-<div align="center">
+<table>
+<tr>
+<td width="46%" valign="top" align="center">
+
+<img src="./portrait.svg" alt="ASCII-art portrait of Ian Kimani: a young man with short hair and aviator-style glasses, looking straight at the camera." width="100%" />
+
+</td>
+<td width="54%" valign="top">
 
 # Ian Kimani
 
 `junior software developer` &bull; `kisumu, kenya` &bull; `physicist by training`
 
-</div>
+Junior software developer in Kisumu, on the shores of Lake Victoria. I came into code through physics: break a problem into pieces small enough to measure, then test each one. I lean backend, mostly **Go** and **Python**, with **React** and **Next.js** when something needs a face.
 
-<br>
+Training at **Zone01**, a peer-driven, project-based bootcamp, and part of the **Mastercard Foundation Associates Program**. I also review AI data labeling projects (egocentric video annotation).
 
-I'm Ian, a junior software developer based in Kisumu, on the shores of Lake Victoria. I came into code through physics, and I still work the way that background taught me: break a problem into pieces small enough to measure, then test each one. I lean toward the backend, mostly in Go and Python, with React and Next.js when something needs a face.
+I keep coming back to system design, Bitcoin and Lightning Network infrastructure, and explaining what I learn: I write on dev.to, facilitate developer sessions at Zone01, and I'm active in the Kisumu tech community.
 
-I'm training at **Zone01**, a peer-driven, project-based bootcamp in the 01 Edu / 42 School network, where there is no teacher at the front of the room. You learn by building, getting stuck, and working it out with the people around you. I'm also part of the **Mastercard Foundation Associates Program**, implemented by Shortlist Futures in East Africa. Alongside that, I work as a reviewer on AI data labeling projects, checking egocentric video annotations.
+**Open to junior roles and collaborations.**
 
-The things I keep coming back to are system design, Bitcoin and Lightning Network infrastructure, and explaining what I learn. I write technical articles on dev.to (Go benchmarks, concurrency, and AI topics so far), I facilitate developer discussion sessions at Zone01, and I'm active in the Kisumu tech community.
+</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
 
-### 🔨 Things I've built
-* **Detecto** &mdash; Real-time person detection and counting *(FastAPI, YOLO, React)*
-* **Guidely** &mdash; RAG-based internal knowledge assistant
-* **Wekonomy** &mdash; Kenyan-themed Monopoly-style browser game *(Go, React, TypeScript)*
-* **WeatherAI Gateway** &mdash; Quota-aware weather API with SQLite caching
-* **Sabi** &mdash; Lightning Network credit history for informal borrowers
+<a href="https://github.com/frihk" target="_blank"><img height="130" src="https://get-readme-stats.vercel.app/api?username=Frihk&show_icons=true&bg_color=00000000&hide_border=true&hide_title=true&alt=GitHub%20statistics" alt="GitHub statistics for Frihk" /></a>
+<a href="https://github.com/frihk" target="_blank"><img height="130" src="https://get-readme-stats.vercel.app/api/top-langs/?username=Frihk&layout=compact&bg_color=00000000&hide_border=true&hide_title=true" alt="Top languages for Frihk" /></a>
 
-<div align="center">
-  <img src="./portrait.svg" alt="ASCII-art portrait of Ian Kimani: a young man with short hair and aviator-style glasses, looking straight at the camera." width="820" />
-</div>
-
-<br>
-
-<div align="center">
-  <img src="./terminal.svg" alt="Animated terminal: Ian Kimani, junior software developer in Kisumu, Kenya. Physicist by training, backend by stubbornness. Go, Python, JavaScript, React and Next.js. Open to junior roles and collaborations." width="820" />
-</div>
+</td>
+</tr>
+</table>
 
 <p align="center">
   <sub>ian kimani &bull; kisumu, kenya &bull; <a href="https://github.com/frihk">github.com/frihk</a></sub>
