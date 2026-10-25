@@ -21,6 +21,10 @@ The things I keep coming back to are system design, Bitcoin and Lightning Networ
 * **WeatherAI Gateway** &mdash; Quota-aware weather API with SQLite caching
 * **Sabi** &mdash; Lightning Network credit history for informal borrowers
 
+<div align="center">
+  <img src="./portrait.svg" alt="ASCII-art portrait of Ian Kimani: a young man with short hair and aviator-style glasses, looking straight at the camera." width="820" />
+</div>
+
 <br>
 
 <div align="center">
