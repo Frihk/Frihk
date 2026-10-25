@@ -7,7 +7,7 @@
 </td>
 <td width="54%" valign="top">
 
-# Ian Kimani Njeri (Frihk)
+# Ian Kimani
 
 `junior software developer` &bull; `kisumu, kenya` &bull; `physicist by training`
 
