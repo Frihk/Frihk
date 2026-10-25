@@ -1,0 +1,686 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 936" width="820" height="936" role="img" aria-label="Terminal session for Ian Kimani (@frihk), Kisumu Kenya">
+  <title>ian@kisumu: ~ [0.09°S, 34.76°E]</title>
+  <defs>
+    <linearGradient id="scanlineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.03" />
+      <stop offset="50%" stop-color="#000000" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
+    </linearGradient>
+    <pattern id="scanlines" width="100%" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="820" y2="0" stroke="#000000" stroke-opacity="0.22" stroke-width="1.2" />
+    </pattern>
+    <radialGradient id="topGlow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#ffb000" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#0c0e11" stop-opacity="0" />
+    </radialGradient>
+    <clipPath id="clip-0">
+        <rect id="clip-rect-0" x="28" y="68" width="586" height="24" style="transform-origin: 28px 86px;" />
+      </clipPath>
+<clipPath id="clip-1">
+        <rect id="clip-rect-1" x="28" y="90" width="409" height="24" style="transform-origin: 28px 108px;" />
+      </clipPath>
+<clipPath id="clip-2">
+        <rect id="clip-rect-2" x="28" y="112" width="544" height="24" style="transform-origin: 28px 130px;" />
+      </clipPath>
+<clipPath id="clip-3">
+        <rect id="clip-rect-3" x="28" y="134" width="594" height="24" style="transform-origin: 28px 152px;" />
+      </clipPath>
+<clipPath id="clip-4">
+        <rect id="clip-rect-4" x="28" y="156" width="586" height="24" style="transform-origin: 28px 174px;" />
+      </clipPath>
+<clipPath id="clip-5">
+        <rect id="clip-rect-5" x="28" y="178" width="460" height="24" style="transform-origin: 28px 196px;" />
+      </clipPath>
+<clipPath id="clip-6">
+        <rect id="clip-rect-6" x="28" y="200" width="611" height="24" style="transform-origin: 28px 218px;" />
+      </clipPath>
+<clipPath id="clip-7">
+        <rect id="clip-rect-7" x="28" y="222" width="586" height="24" style="transform-origin: 28px 240px;" />
+      </clipPath>
+<clipPath id="clip-8">
+        <rect id="clip-rect-8" x="28" y="244" width="594" height="24" style="transform-origin: 28px 262px;" />
+      </clipPath>
+<clipPath id="clip-9">
+        <rect id="clip-rect-9" x="28" y="266" width="241" height="24" style="transform-origin: 28px 284px;" />
+      </clipPath>
+<clipPath id="clip-10">
+        <rect id="clip-rect-10" x="28" y="288" width="241" height="24" style="transform-origin: 28px 306px;" />
+      </clipPath>
+<clipPath id="clip-11">
+        <rect id="clip-rect-11" x="28" y="310" width="241" height="24" style="transform-origin: 28px 328px;" />
+      </clipPath>
+<clipPath id="clip-12">
+        <rect id="clip-rect-12" x="28" y="332" width="241" height="24" style="transform-origin: 28px 350px;" />
+      </clipPath>
+<clipPath id="clip-14">
+        <rect id="clip-rect-14" x="28" y="376" width="266" height="24" style="transform-origin: 28px 394px;" />
+      </clipPath>
+<clipPath id="clip-15">
+        <rect id="clip-rect-15" x="28" y="398" width="619" height="24" style="transform-origin: 28px 416px;" />
+      </clipPath>
+<clipPath id="clip-16">
+        <rect id="clip-rect-16" x="28" y="420" width="275" height="24" style="transform-origin: 28px 438px;" />
+      </clipPath>
+<clipPath id="clip-17">
+        <rect id="clip-rect-17" x="28" y="442" width="611" height="24" style="transform-origin: 28px 460px;" />
+      </clipPath>
+<clipPath id="clip-19">
+        <rect id="clip-rect-19" x="28" y="486" width="258" height="24" style="transform-origin: 28px 504px;" />
+      </clipPath>
+<clipPath id="clip-20">
+        <rect id="clip-rect-20" x="28" y="508" width="250" height="24" style="transform-origin: 28px 526px;" />
+      </clipPath>
+<clipPath id="clip-21">
+        <rect id="clip-rect-21" x="28" y="530" width="392" height="24" style="transform-origin: 28px 548px;" />
+      </clipPath>
+<clipPath id="clip-23">
+        <rect id="clip-rect-23" x="28" y="574" width="569" height="24" style="transform-origin: 28px 592px;" />
+      </clipPath>
+<clipPath id="clip-24">
+        <rect id="clip-rect-24" x="28" y="596" width="434" height="24" style="transform-origin: 28px 614px;" />
+      </clipPath>
+<clipPath id="clip-25">
+        <rect id="clip-rect-25" x="28" y="618" width="602" height="24" style="transform-origin: 28px 636px;" />
+      </clipPath>
+<clipPath id="clip-27">
+        <rect id="clip-rect-27" x="28" y="662" width="434" height="24" style="transform-origin: 28px 680px;" />
+      </clipPath>
+<clipPath id="clip-28">
+        <rect id="clip-rect-28" x="28" y="684" width="586" height="24" style="transform-origin: 28px 702px;" />
+      </clipPath>
+<clipPath id="clip-29">
+        <rect id="clip-rect-29" x="28" y="706" width="602" height="24" style="transform-origin: 28px 724px;" />
+      </clipPath>
+<clipPath id="clip-30">
+        <rect id="clip-rect-30" x="28" y="728" width="644" height="24" style="transform-origin: 28px 746px;" />
+      </clipPath>
+<clipPath id="clip-31">
+        <rect id="clip-rect-31" x="28" y="750" width="644" height="24" style="transform-origin: 28px 768px;" />
+      </clipPath>
+<clipPath id="clip-32">
+        <rect id="clip-rect-32" x="28" y="772" width="644" height="24" style="transform-origin: 28px 790px;" />
+      </clipPath>
+<clipPath id="clip-33">
+        <rect id="clip-rect-33" x="28" y="794" width="586" height="24" style="transform-origin: 28px 812px;" />
+      </clipPath>
+<clipPath id="clip-35">
+        <rect id="clip-rect-35" x="28" y="838" width="317" height="24" style="transform-origin: 28px 856px;" />
+      </clipPath>
+<clipPath id="clip-36">
+        <rect id="clip-rect-36" x="28" y="860" width="628" height="24" style="transform-origin: 28px 878px;" />
+      </clipPath>
+  </defs>
+
+  <style>
+    
+    @keyframes termCycle {
+      0% { opacity: 1; }
+      99.08% { opacity: 1; }
+      99.3% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .terminal-content {
+      animation: termCycle 43.38s infinite;
+    }
+    
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .blinking-cursor {
+      animation: blink 0.9s infinite;
+    }
+    
+
+        @keyframes reveal-line-0 {
+          0%, 1.15% {
+            transform: scaleX(0);
+          }
+          6.80%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-0 {
+          animation: reveal-line-0 43.38s steps(51, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-1 {
+          0%, 7.83% {
+            transform: scaleX(0);
+          }
+          9.05%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-1 {
+          animation: reveal-line-1 43.38s steps(44, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-2 {
+          0%, 9.69% {
+            transform: scaleX(0);
+          }
+          11.35%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-2 {
+          animation: reveal-line-2 43.38s steps(60, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-3 {
+          0%, 12.00% {
+            transform: scaleX(0);
+          }
+          13.83%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-3 {
+          animation: reveal-line-3 43.38s steps(66, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-4 {
+          0%, 14.47% {
+            transform: scaleX(0);
+          }
+          16.27%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-4 {
+          animation: reveal-line-4 43.38s steps(65, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-5 {
+          0%, 16.91% {
+            transform: scaleX(0);
+          }
+          18.30%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-5 {
+          animation: reveal-line-5 43.38s steps(50, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-6 {
+          0%, 18.94% {
+            transform: scaleX(0);
+          }
+          20.82%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-6 {
+          animation: reveal-line-6 43.38s steps(68, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-7 {
+          0%, 21.47% {
+            transform: scaleX(0);
+          }
+          23.27%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-7 {
+          animation: reveal-line-7 43.38s steps(65, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-8 {
+          0%, 23.91% {
+            transform: scaleX(0);
+          }
+          25.74%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-8 {
+          animation: reveal-line-8 43.38s steps(66, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-9 {
+          0%, 26.38% {
+            transform: scaleX(0);
+          }
+          27.05%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-9 {
+          animation: reveal-line-9 43.38s steps(24, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-10 {
+          0%, 27.69% {
+            transform: scaleX(0);
+          }
+          28.36%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-10 {
+          animation: reveal-line-10 43.38s steps(24, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-11 {
+          0%, 29.00% {
+            transform: scaleX(0);
+          }
+          29.67%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-11 {
+          animation: reveal-line-11 43.38s steps(24, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-12 {
+          0%, 30.31% {
+            transform: scaleX(0);
+          }
+          30.97%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-12 {
+          animation: reveal-line-12 43.38s steps(24, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-14 {
+          0%, 31.85% {
+            transform: scaleX(0);
+          }
+          33.29%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-14 {
+          animation: reveal-line-14 43.38s steps(13, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-15 {
+          0%, 34.33% {
+            transform: scaleX(0);
+          }
+          36.23%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-15 {
+          animation: reveal-line-15 43.38s steps(69, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-16 {
+          0%, 36.88% {
+            transform: scaleX(0);
+          }
+          37.65%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-16 {
+          animation: reveal-line-16 43.38s steps(28, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-17 {
+          0%, 38.30% {
+            transform: scaleX(0);
+          }
+          40.18%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-17 {
+          animation: reveal-line-17 43.38s steps(68, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-19 {
+          0%, 41.06% {
+            transform: scaleX(0);
+          }
+          42.38%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-19 {
+          animation: reveal-line-19 43.38s steps(12, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-20 {
+          0%, 43.42% {
+            transform: scaleX(0);
+          }
+          44.11%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-20 {
+          animation: reveal-line-20 43.38s steps(25, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-21 {
+          0%, 44.76% {
+            transform: scaleX(0);
+          }
+          45.92%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-21 {
+          animation: reveal-line-21 43.38s steps(42, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-23 {
+          0%, 46.80% {
+            transform: scaleX(0);
+          }
+          52.22%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-23 {
+          animation: reveal-line-23 43.38s steps(49, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-24 {
+          0%, 53.25% {
+            transform: scaleX(0);
+          }
+          54.55%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-24 {
+          animation: reveal-line-24 43.38s steps(47, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-25 {
+          0%, 55.20% {
+            transform: scaleX(0);
+          }
+          57.05%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-25 {
+          animation: reveal-line-25 43.38s steps(67, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-27 {
+          0%, 57.93% {
+            transform: scaleX(0);
+          }
+          61.58%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-27 {
+          animation: reveal-line-27 43.38s steps(33, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-28 {
+          0%, 62.62% {
+            transform: scaleX(0);
+          }
+          64.42%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-28 {
+          animation: reveal-line-28 43.38s steps(65, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-29 {
+          0%, 65.06% {
+            transform: scaleX(0);
+          }
+          66.91%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-29 {
+          animation: reveal-line-29 43.38s steps(67, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-30 {
+          0%, 67.56% {
+            transform: scaleX(0);
+          }
+          69.55%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-30 {
+          animation: reveal-line-30 43.38s steps(72, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-31 {
+          0%, 70.20% {
+            transform: scaleX(0);
+          }
+          72.19%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-31 {
+          animation: reveal-line-31 43.38s steps(72, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-32 {
+          0%, 72.83% {
+            transform: scaleX(0);
+          }
+          74.82%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-32 {
+          animation: reveal-line-32 43.38s steps(72, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-33 {
+          0%, 75.47% {
+            transform: scaleX(0);
+          }
+          77.27%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-33 {
+          animation: reveal-line-33 43.38s steps(65, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-35 {
+          0%, 78.14% {
+            transform: scaleX(0);
+          }
+          80.25%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-35 {
+          animation: reveal-line-35 43.38s steps(19, end) infinite;
+        }
+        
+
+        @keyframes reveal-line-36 {
+          0%, 81.28% {
+            transform: scaleX(0);
+          }
+          83.22%, 100% {
+            transform: scaleX(1);
+          }
+        }
+        #clip-rect-36 {
+          animation: reveal-line-36 43.38s steps(70, end) infinite;
+        }
+        
+
+    @keyframes cursorReveal {
+      0%, 83.87% { opacity: 0; }
+      83.88%, 100% { opacity: 1; }
+    }
+    .end-cursor-group {
+      animation: cursorReveal 43.38s infinite;
+    }
+    
+  </style>
+
+  <!-- Terminal Window Background -->
+  <rect x="0.5" y="0.5" width="819" height="935" rx="8" fill="#0c0e11" stroke="#232731" stroke-width="1" />
+
+  <!-- Top Ambient Phosphor Glow -->
+  <rect x="1" y="1" width="818" height="140" rx="8" fill="url(#topGlow)" pointer-events="none" />
+
+  <!-- Window Header / Title Bar -->
+  <path d="M 0.5 8.5 A 8 8 0 0 1 8.5 0.5 L 811.5 0.5 A 8 8 0 0 1 819.5 8.5 L 819.5 40 L 0.5 40 Z" fill="#14171d" />
+  <line x1="0.5" y1="40" x2="819.5" y2="40" stroke="#232731" stroke-width="1" />
+
+  <!-- Hollow Ring Window Controls (Amber, Teal, Dim) -->
+  <circle cx="24" cy="20" r="5" fill="none" stroke="#ffb000" stroke-width="1.6" />
+  <circle cx="42" cy="20" r="5" fill="none" stroke="#5fd7c4" stroke-width="1.6" />
+  <circle cx="60" cy="20" r="5" fill="none" stroke="#7d7358" stroke-width="1.6" />
+
+  <!-- Window Title -->
+  <text x="410" y="25" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="12" fill="#7d7358" letter-spacing="0.5">ian@kisumu: ~ — 0.09°S 34.76°E</text>
+
+  <!-- Animated Terminal Body -->
+  <g class="terminal-content">
+    <g clip-path="url(#clip-0)">
+        <text x="28" y="86" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#ffb000">ian@kisumu:~$ </tspan><tspan fill="#e8e1d0">curl -s https://frihk.dev/avatar.ascii | head -n 12</tspan></text>
+      </g>
+<g clip-path="url(#clip-1)">
+        <text x="28" y="108" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">      =*%@@@@@%*-       </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#5fd7c4">Ian Kimani</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#7d7358">(frihk)</tspan></text>
+      </g>
+<g clip-path="url(#clip-2)">
+        <text x="28" y="130" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">    *%#+-::::-+*##-     </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">title  :</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">junior software developer</tspan></text>
+      </g>
+<g clip-path="url(#clip-3)">
+        <text x="28" y="152" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">   #%*+=:....:---+%     </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">loc    :</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#ffb000">Kisumu, Kenya</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#7d7358">[0.09°S, 34.76°E]</tspan></text>
+      </g>
+<g clip-path="url(#clip-4)">
+        <text x="28" y="174" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">   %#*++=----=====-     </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">origin :</tspan><tspan fill="#7d7358"> Physics -&gt; Backend engineering</tspan></text>
+      </g>
+<g clip-path="url(#clip-5)">
+        <text x="28" y="196" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">   %@@@@%%##@@@%%#+     </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">cohort :</tspan><tspan fill="#7d7358"> Zone01 bootcamp</tspan></text>
+      </g>
+<g clip-path="url(#clip-6)">
+        <text x="28" y="218" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">  .@@@@@@@-+@@@%##+     </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">focus  :</tspan><tspan fill="#7d7358"> AI data labeling / annotation ops</tspan></text>
+      </g>
+<g clip-path="url(#clip-7)">
+        <text x="28" y="240" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">   *@##*#*:-+****+=     </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">stack  :</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#5fd7c4">Go</tspan><tspan fill="#7d7358">, </tspan><tspan fill="#5fd7c4">Python</tspan><tspan fill="#7d7358">, </tspan><tspan fill="#e8e1d0">JS, React, Next.js</tspan></text>
+      </g>
+<g clip-path="url(#clip-8)">
+        <text x="28" y="262" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">    *@%+*@@@%*+##*      </tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">hiring :</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#ffb000">OPEN</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#7d7358">for junior roles &amp; collabs</tspan></text>
+      </g>
+<g clip-path="url(#clip-9)">
+        <text x="28" y="284" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">     #@@@@%%%%@%%=      </tspan></text>
+      </g>
+<g clip-path="url(#clip-10)">
+        <text x="28" y="306" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">    .@@@@@@@@@@@%@*     </tspan></text>
+      </g>
+<g clip-path="url(#clip-11)">
+        <text x="28" y="328" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">    .*@@@@@@@@@@@@:     </tspan></text>
+      </g>
+<g clip-path="url(#clip-12)">
+        <text x="28" y="350" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">  ..: *@@@@@@@@@@-      </tspan></text>
+      </g>
+<g clip-path="url(#clip-14)">
+        <text x="28" y="394" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#ffb000">ian@kisumu:~$ </tspan><tspan fill="#e8e1d0">cat about.txt</tspan></text>
+      </g>
+<g clip-path="url(#clip-15)">
+        <text x="28" y="416" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">background :</tspan><tspan fill="#7d7358"> Physics graduate, transitioning into backend engineering</tspan></text>
+      </g>
+<g clip-path="url(#clip-16)">
+        <text x="28" y="438" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">training   :</tspan><tspan fill="#7d7358"> Zone01 bootcamp</tspan></text>
+      </g>
+<g clip-path="url(#clip-17)">
+        <text x="28" y="460" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">work       :</tspan><tspan fill="#7d7358"> AI data labeling reviewer </tspan><tspan fill="#7d7358">(egocentric video annotation)</tspan></text>
+      </g>
+<g clip-path="url(#clip-19)">
+        <text x="28" y="504" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#ffb000">ian@kisumu:~$ </tspan><tspan fill="#e8e1d0">ls -l stack/</tspan></text>
+      </g>
+<g clip-path="url(#clip-20)">
+        <text x="28" y="526" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">core_backend </tspan><tspan fill="#7d7358"> </tspan><tspan fill="#5fd7c4">go</tspan><tspan fill="#7d7358">   </tspan><tspan fill="#5fd7c4">python</tspan></text>
+      </g>
+<g clip-path="url(#clip-21)">
+        <text x="28" y="548" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">web_systems  </tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">javascript</tspan><tspan fill="#7d7358">   </tspan><tspan fill="#e8e1d0">react</tspan><tspan fill="#7d7358">   </tspan><tspan fill="#e8e1d0">next.js</tspan></text>
+      </g>
+<g clip-path="url(#clip-23)">
+        <text x="28" y="592" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#ffb000">ian@kisumu:~$ </tspan><tspan fill="#e8e1d0">curl -s https://api.frihk.dev/pipeline | progress</tspan></text>
+      </g>
+<g clip-path="url(#clip-24)">
+        <text x="28" y="614" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#ffb000">[########################################]</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#5fd7c4">100%</tspan></text>
+      </g>
+<g clip-path="url(#clip-25)">
+        <text x="28" y="636" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">sync:</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">zone01_curriculum -&gt; video_annotation_ops -&gt; backend_services</tspan></text>
+      </g>
+<g clip-path="url(#clip-27)">
+        <text x="28" y="680" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#ffb000">ian@kisumu:~$ </tspan><tspan fill="#e8e1d0">gh stats --telemetry --user=Frihk</tspan></text>
+      </g>
+<g clip-path="url(#clip-28)">
+        <text x="28" y="702" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">┌─ PERFORMANCE &amp; TELEMETRY ─────────────────────────────────────┐</tspan></text>
+      </g>
+<g clip-path="url(#clip-29)">
+        <text x="28" y="724" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">│</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">Repos:</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#ffb000">39</tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">│</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">Followers:</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#5fd7c4">5</tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">│</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">Status:</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#5fd7c4">ACTIVE</tspan><tspan fill="#7d7358">  </tspan><tspan fill="#7d7358">│</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">Uptime:</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#ffb000">99.98%</tspan><tspan fill="#7d7358">   </tspan><tspan fill="#7d7358">│</tspan></text>
+      </g>
+<g clip-path="url(#clip-30)">
+        <text x="28" y="746" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">│</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">Go        </tspan><tspan fill="#7d7358"> </tspan><tspan fill="#ffb000">████████████████████</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#7d7358">44%</tspan><tspan fill="#7d7358">                                  </tspan><tspan fill="#7d7358">│</tspan></text>
+      </g>
+<g clip-path="url(#clip-31)">
+        <text x="28" y="768" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">│</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">JS/Next   </tspan><tspan fill="#7d7358"> </tspan><tspan fill="#5fd7c4">████████████████</tspan><tspan fill="#7d7358">     </tspan><tspan fill="#7d7358">36%</tspan><tspan fill="#7d7358">                                  </tspan><tspan fill="#7d7358">│</tspan></text>
+      </g>
+<g clip-path="url(#clip-32)">
+        <text x="28" y="790" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">│</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">Python    </tspan><tspan fill="#7d7358"> </tspan><tspan fill="#7d7358">████████</tspan><tspan fill="#7d7358">             </tspan><tspan fill="#7d7358">16%</tspan><tspan fill="#7d7358">                                  </tspan><tspan fill="#7d7358">│</tspan></text>
+      </g>
+<g clip-path="url(#clip-33)">
+        <text x="28" y="812" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">└───────────────────────────────────────────────────────────────┘</tspan></text>
+      </g>
+<g clip-path="url(#clip-35)">
+        <text x="28" y="856" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#ffb000">ian@kisumu:~$ </tspan><tspan fill="#e8e1d0">git status --hiring</tspan></text>
+      </g>
+<g clip-path="url(#clip-36)">
+        <text x="28" y="878" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" font-weight="500"><tspan fill="#7d7358">status:</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#ffb000">OPEN</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#7d7358">—</tspan><tspan fill="#7d7358"> </tspan><tspan fill="#e8e1d0">available for junior roles &amp; open-source collaborations</tspan></text>
+      </g>
+<g class="end-cursor-group">
+        <text x="28" y="900" font-family="ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', 'Courier New', monospace" font-size="14" fill="#ffb000" font-weight="500">ian@kisumu:~$ </text>
+        <rect class="blinking-cursor" x="145" y="888" width="8.5" height="15" fill="#ffb000" />
+      </g>
+  </g>
+
+  <!-- Scanline Overlay for Phosphor Aesthetic -->
+  <rect x="1" y="41" width="818" height="894" fill="url(#scanlines)" pointer-events="none" />
+</svg>

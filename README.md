@@ -1,28 +1,32 @@
-## 🛬 About
+<div align="center">
 
-👋 Hi, I’m @Frihk 👀 I’m interested in coding to help hone my skills in it 🌱 I’m currently learning software engeneering 📫 How to reach me ,,, just text me
+# Ian Kimani
 
-## 📈 Statistics
+`junior software developer` &bull; `kisumu, kenya` &bull; `physicist by training`
+
+</div>
 
 <br>
-<p align="left">
-    <a href="https://github.com/the1Riddle" target="_blank"><img height="145em" src="https://get-readme-stats.vercel.app/api?username=rezzcode&show_icons=true&bg_color=00000000&hide_border=true&hide_title=true&alt="GitHub statistics"></a>
-    <a href="https://github.com/the1Riddle" target="_blank" target="_blank"><img height="145em" src="https://get-readme-stats.vercel.app/api/top-langs/?username=rezzcode&layout=compact&bg_color=00000000&hide_border=true&hide_title=true&hide=shaderlab"></a>
+
+I'm Ian, a junior software developer based in Kisumu, on the shores of Lake Victoria. I came into code through physics, and I still work the way that background taught me: break a problem into pieces small enough to measure, then test each one. I lean toward the backend, mostly in Go and Python, with React and Next.js when something needs a face.
+
+I'm training at **Zone01**, a peer-driven, project-based bootcamp in the 01 Edu / 42 School network, where there is no teacher at the front of the room. You learn by building, getting stuck, and working it out with the people around you. I'm also part of the **Mastercard Foundation Associates Program**, implemented by Shortlist Futures in East Africa. Alongside that, I work as a reviewer on AI data labeling projects, checking egocentric video annotations.
+
+The things I keep coming back to are system design, Bitcoin and Lightning Network infrastructure, and explaining what I learn. I write technical articles on dev.to (Go benchmarks, concurrency, and AI topics so far), I facilitate developer discussion sessions at Zone01, and I'm active in the Kisumu tech community.
+
+### 🔨 Things I've built
+* **Detecto** &mdash; Real-time person detection and counting *(FastAPI, YOLO, React)*
+* **Guidely** &mdash; RAG-based internal knowledge assistant
+* **Wekonomy** &mdash; Kenyan-themed Monopoly-style browser game *(Go, React, TypeScript)*
+* **WeatherAI Gateway** &mdash; Quota-aware weather API with SQLite caching
+* **Sabi** &mdash; Lightning Network credit history for informal borrowers
+
+<br>
+
+<div align="center">
+  <img src="./terminal.svg" alt="Animated terminal: Ian Kimani, junior software developer in Kisumu, Kenya. Physicist by training, backend by stubbornness. Go, Python, JavaScript, React and Next.js. Open to junior roles and collaborations." width="820" />
+</div>
+
+<p align="center">
+  <sub>ian kimani &bull; kisumu, kenya &bull; <a href="https://github.com/frihk">github.com/frihk</a></sub>
 </p>
-
-## ✍️ Random Dev Joke.
-
-
-  &nbsp; &nbsp; &nbsp; &nbsp; A SQL query goes into a bar, walks up to two tables, and asks...
-  
-  &nbsp; &nbsp; &nbsp; &nbsp; Can I JOIN you? 😂 😄
-
-<br>
-
-[![](https://visitcountpro.netlify.app/api?id=VishwaGauravIn&label=Visits&color=8&icon=2&pretty=true)](https://github.com/the1Riddle) [![Ko-fi](https://img.shields.io/badge/Tea-coffee-red?logo=ko-fi)](https://ko-fi.com/the1riddle)
-
-<!---
-
-the-1Riddle/the-1Riddle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes
---->
