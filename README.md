@@ -1,11 +1,11 @@
-<table>
+<table width="100%">
 <tr>
-<td width="46%" valign="top" align="center">
+<td width="50%" valign="middle" align="center">
 
 <img src="./portrait.svg" alt="ASCII-art portrait of Ian Kimani: a young man with short hair and aviator-style glasses, looking straight at the camera." width="100%" />
 
 </td>
-<td width="54%" valign="top">
+<td width="50%" valign="middle">
 
 # Ian Kimani
 
