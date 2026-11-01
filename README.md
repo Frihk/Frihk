@@ -1,17 +1,42 @@
-<h1 align="center">Ian Kimani</h1>
-
 <p align="center">
-  <code>junior software developer</code> &bull; <code>kisumu, kenya</code> &bull; <code>physicist by training</code>
+  <code>junior software developer</code> • <code>kisumu, kenya</code> • <code>physicist by training</code>
 </p>
 
-<table width="100%">
-<tr>
-<td width="50%" valign="middle" align="center">
+<p align="center">
+  <a href="https://github.com/frihk">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg">
+      <img alt="Ian Kimani — junior software developer in Kisumu, Kenya. Go, JavaScript, Python, React, Next.js." src="light_mode.svg" width="900">
+    </picture>
+  </a>
+</p>
 
-<img src="./portrait.svg" width="100%" alt="ASCII-art portrait of Ian Kimani: a young man with short hair and aviator-style glasses, looking straight at the camera." />
+<p align="center">
+  <a href="https://github.com/frihk"><strong>GitHub</strong></a> &bull;
+  <a href="https://dev.to/frihk"><strong>dev.to</strong></a> &bull;
+  <a href="TODO_URL"><strong>LinkedIn</strong></a> &bull;
+  <a href="mailto:frihkian05@gmail.com"><strong>Email</strong></a>
+  <br>
+  <strong>Featured Projects:</strong>
+  <a href="https://github.com/frihk/Detecto">Detecto</a> &bull;
+  <a href="https://github.com/frihk/guidely">Guidely</a> &bull;
+  <a href="https://github.com/frihk/WeatherAIGateway">WeatherAI Gateway</a> &bull;
+  <a href="https://github.com/frihk/Skill-match">Skill-match</a> &bull;
+  <a href="https://github.com/frihk?tab=repositories">All Repositories</a>
+</p>
 
-</td>
-<td width="50%" valign="middle">
+<h3 align="center">Contributions &amp; Milestones</h3>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="contributions_dark.svg">
+    <img alt="Ian Kimani's GitHub contribution graph and streak milestones" src="contributions_light.svg" width="900">
+  </picture>
+</p>
+
+<details>
+  <summary><strong>Longer bio</strong></summary>
+  <br>
 
 I'm **Ian Kimani**, a software developer in Kisumu, Kenya, with a physicist's discipline: I break problems into measurable pieces, test each, and ship what holds up. Backend-focused in Go, JavaScript, and Python, and fluent in React and Next.js, I build complete products.
 
@@ -19,10 +44,4 @@ Don't take my word for it, read the code. **Detecto** counts people in live vide
 
 I trained at Zone01, a peer-driven, project-based bootcamp in the 01 Edu network, where there is no teacher at the front of the room. You learn by building, getting stuck, and working it out with the people around you. I'm also part of the Mastercard Foundation Associates Program, implemented by Shortlist Futures in East Africa.
 
-</td>
-</tr>
-</table>
-
-<p align="center">
-  <sub>ian kimani &bull; kisumu, kenya &bull; <a href="https://github.com/frihk">github.com/frihk</a></sub>
-</p>
+</details>
