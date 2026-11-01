@@ -1,0 +1,68 @@
+name: Update Neofetch Card
+
+on:
+  schedule:
+    # Daily run at 03:17 UTC (off-peak)
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'scripts/**'
+      - 'assets/**'
+      - 'requirements.txt'
+      - '.github/workflows/update-card.yml'
+
+concurrency:
+  group: update-profile-card
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-card:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch GitHub statistics
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          USER_NAME: frihk
+        run: |
+          python scripts/github_stats.py --user frihk --output cache/stats.json
+
+      - name: Build terminal cards & heatmaps
+        run: |
+          python scripts/build_card.py --stats-file cache/stats.json --portrait-file assets/portrait.txt --output-dir .
+
+      - name: Run verification test suite
+        run: |
+          pytest -v tests/
+
+      - name: Commit and push changes if updated
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add dark_mode.svg light_mode.svg contributions_dark.svg contributions_light.svg cache/stats.json
+          if git diff --staged --quiet; then
+            echo "No changes in generated cards or stats."
+          else
+            git commit -m "chore(card): auto-update neofetch cards and stats [skip ci]"
+            git push
+          fi
