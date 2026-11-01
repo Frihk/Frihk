@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" width="900" height="720">
+  <title>Ian Kimani — Terminal Profile Card (Dark Mode)</title>
+  <desc>Neofetch-style terminal profile card displaying Ian Kimani's identity, technical stack, projects, and GitHub metrics.</desc>
+  <style>
+    text {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      text-rendering: geometricPrecision;
+    }
+    .portrait {
+      font-size: 11.5px;
+      fill: #58a6ff;
+      font-weight: 500;
+    }
+    .info {
+      font-size: 14.5px;
+      font-weight: 400;
+    }
+    .term-hdr { fill: #c9d1d9; font-weight: 700; }
+    .term-sec { fill: #c9d1d9; font-weight: 600; }
+    .term-key { fill: #ffa657; font-weight: 500; }
+    .term-dot { fill: #6e7681; opacity: 0.85; }
+    .term-val { fill: #a5d6ff; }
+    .term-rule { fill: #30363d; }
+    .term-add { fill: #3fb950; font-weight: 600; }
+    .term-del { fill: #f85149; font-weight: 600; }
+    .window-title { fill: #8b949e; font-size: 13px; font-weight: 500; }
+  </style>
+
+  <!-- Terminal Window Background -->
+  <rect x="0.5" y="0.5" width="899" height="719" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Window Chrome Top Bar -->
+  <path d="M 0.5 12.5 A 12 12 0 0 1 12.5 0.5 L 887.5 0.5 A 12 12 0 0 1 899.5 12.5 L 899.5 36.5 L 0.5 36.5 Z" fill="#0d1117"/>
+  <circle cx="22" cy="18" r="6" fill="#ff5f56"/>
+  <circle cx="42" cy="18" r="6" fill="#ffbd2e"/>
+  <circle cx="62" cy="18" r="6" fill="#27c93f"/>
+  <text x="450.0" y="23" text-anchor="middle" class="window-title">ian@kimani — frihk</text>
+  <line x1="0" y1="36.5" x2="900" y2="36.5" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Left Column: ASCII Portrait -->
+  <g class="portrait">
+    <text x="24" y="75.0" xml:space="preserve">                    ,,,,,..,;,,                     </text>
+    <text x="24" y="94.0" xml:space="preserve">                 .,..         .:.                   </text>
+    <text x="24" y="113.0" xml:space="preserve">               ..  .:;;==;-;;:. ..                  </text>
+    <text x="24" y="132.0" xml:space="preserve">               , -@@@@@@@@@@@@@@- .                 </text>
+    <text x="24" y="151.0" xml:space="preserve">              . +@@@@@@@@@@@@@@@@* .                </text>
+    <text x="24" y="170.0" xml:space="preserve">              .=@@@@@@@@@@@@@@@@@@+..               </text>
+    <text x="24" y="189.0" xml:space="preserve">              ;@%@@@@@@@@@@@@@@@@@@=.               </text>
+    <text x="24" y="208.0" xml:space="preserve">             .+#@@@@@@@@@@@@@@@@@@@@,               </text>
+    <text x="24" y="227.0" xml:space="preserve">             :-;@@@@@@@@@@@@@@@@@@@@=               </text>
+    <text x="24" y="246.0" xml:space="preserve">             :%%=....:+#%#=,  ;-#@@@;               </text>
+    <text x="24" y="265.0" xml:space="preserve">             ,+  .;,   ;=:   .. .;#%#+              </text>
+    <text x="24" y="284.0" xml:space="preserve">             ,,  ,;,;. +@+  :.;=.;*@@+              </text>
+    <text x="24" y="303.0" xml:space="preserve">             ,-=#,,.:,,@@@;;;.,=@%@@=;              </text>
+    <text x="24" y="322.0" xml:space="preserve">             -*+@@,.==#@@@@@=;+@@@@@==              </text>
+    <text x="24" y="341.0" xml:space="preserve">             :@:#@@@@%@@@@@@@@@@@@@#@,              </text>
+    <text x="24" y="360.0" xml:space="preserve">              ;-,@@@@#=+@#+#@@@@@@@:;               </text>
+    <text x="24" y="379.0" xml:space="preserve">               =,:@@@#,:,;#%@@@@@@#                 </text>
+    <text x="24" y="398.0" xml:space="preserve">               ,-.-@@@@#=*+@@@@@@@;                 </text>
+    <text x="24" y="417.0" xml:space="preserve">                :,,,,,.,,:;,; -@@@                  </text>
+    <text x="24" y="436.0" xml:space="preserve">                ,=:,.,#@@@@@@@@@@@                  </text>
+    <text x="24" y="455.0" xml:space="preserve">                *::,:,,,,,.#@@@*+@,                 </text>
+    <text x="24" y="474.0" xml:space="preserve">               *# . .,,,,,:@@: .@# +                </text>
+    <text x="24" y="493.0" xml:space="preserve">             ;*@+ ,.   ...    .%@.;@@:              </text>
+    <text x="24" y="512.0" xml:space="preserve">        ,%@@@@@@@:.,.      ..,,;, @@@@-             </text>
+    <text x="24" y="531.0" xml:space="preserve">       +@@@@@@@@@@ .,.  .,,:,.,. ,@@@@@@            </text>
+    <text x="24" y="550.0" xml:space="preserve">   .;+%@@@@@@==*@@+ .,  .....    %@@@@@@@,          </text>
+    <text x="24" y="569.0" xml:space="preserve">,*#@**#=@@@@@@%+@@@, ..         +@@@;@@@@@-,.       </text>
+    <text x="24" y="588.0" xml:space="preserve">#@%@-:;#@@@@@%*#-;++,,::,..,,..#@:-+;@@@@@@#*%*%#=,.</text>
+    <text x="24" y="607.0" xml:space="preserve">*#*%-, -%*%@@+#%=;.;@+.,:,,,,:@*.--.=@@@@@@+***@-++*</text>
+    <text x="24" y="626.0" xml:space="preserve">%+--;:.=###%#;=++:.  +#=,,,.=#+ :=:;=@@@@##+***%--;-</text>
+    <text x="24" y="645.0" xml:space="preserve">#+*,:;:@@@@@@=#*++,,..;+-;.+#,,:= ,,.=####@;*+*+#=#-</text>
+    <text x="24" y="664.0" xml:space="preserve">@@#.;*@@@@@@@+%#*#,;;%#=##@@;-+=*:+:-@@@@@@#%+@%@%*-</text>
+    <text x="24" y="683.0" xml:space="preserve">@*=.,,%@@@@@@+#%##;: +@@@@@;+-**+;+=+@@@@@@*@*@%*,.,</text>
+  </g>
+
+  <!-- Right Column: Info & Stats -->
+  <g class="info">
+    <text x="428" y="75.0" xml:space="preserve"><tspan class="term-hdr">ian@kimani</tspan> <tspan class="term-rule">-----------------------------------------</tspan></text>
+    <text x="428" y="94.0" xml:space="preserve"><tspan class="term-key">. Role: </tspan><tspan class="term-dot">..................</tspan><tspan class="term-val"> junior software developer</tspan></text>
+    <text x="428" y="113.0" xml:space="preserve"><tspan class="term-key">. Location: </tspan><tspan class="term-dot">..........................</tspan><tspan class="term-val"> Kisumu, Kenya</tspan></text>
+    <text x="428" y="132.0" xml:space="preserve"><tspan class="term-key">. Background: </tspan><tspan class="term-dot">................</tspan><tspan class="term-val"> Physicist by training</tspan></text>
+    <text x="428" y="151.0" xml:space="preserve"><tspan class="term-key">. Training: </tspan><tspan class="term-dot">........</tspan><tspan class="term-val"> Zone01 · 01 Edu (peer-bootcamp)</tspan></text>
+    <text x="428" y="170.0" xml:space="preserve"><tspan class="term-key">. Program: </tspan><tspan class="term-dot">..............</tspan><tspan class="term-val"> Mastercard Foundation (EA)</tspan></text>
+    <text x="428" y="189.0" xml:space="preserve"><tspan class="term-key">. Uptime: </tspan><tspan class="term-dot">...............</tspan><tspan class="term-val"> 2 years, 5 months, 25 days</tspan></text>
+    <text x="428" y="208.0" xml:space="preserve"><tspan class="term-key">. Focus: </tspan><tspan class="term-dot">........</tspan><tspan class="term-val"> backend-focused, complete products</tspan></text>
+    <text x="428" y="246.0" xml:space="preserve"><tspan class="term-sec">- Stack </tspan><tspan class="term-rule">--------------------------------------------</tspan></text>
+    <text x="428" y="265.0" xml:space="preserve"><tspan class="term-key">. Languages.Programming: </tspan><tspan class="term-dot">....</tspan><tspan class="term-val"> Go, JavaScript, Python</tspan></text>
+    <text x="428" y="284.0" xml:space="preserve"><tspan class="term-key">. Frontend: </tspan><tspan class="term-dot">.........................</tspan><tspan class="term-val"> React, Next.js</tspan></text>
+    <text x="428" y="303.0" xml:space="preserve"><tspan class="term-key">. Backend/ML: </tspan><tspan class="term-dot">........................</tspan><tspan class="term-val"> FastAPI, YOLO</tspan></text>
+    <text x="428" y="322.0" xml:space="preserve"><tspan class="term-key">. Languages.Real: </tspan><tspan class="term-dot">..........................</tspan><tspan class="term-val"> English</tspan></text>
+    <text x="428" y="360.0" xml:space="preserve"><tspan class="term-sec">- Projects </tspan><tspan class="term-rule">-----------------------------------------</tspan></text>
+    <text x="428" y="379.0" xml:space="preserve"><tspan class="term-key">. Detecto: </tspan><tspan class="term-dot">.......</tspan><tspan class="term-val"> live video people count (FastAPI)</tspan></text>
+    <text x="428" y="398.0" xml:space="preserve"><tspan class="term-key">. Guidely: </tspan><tspan class="term-dot">.............</tspan><tspan class="term-val"> answers questions from docs</tspan></text>
+    <text x="428" y="417.0" xml:space="preserve"><tspan class="term-key">. WeatherAI Gateway: </tspan><tspan class="term-dot">....</tspan><tspan class="term-val"> smart caching within quota</tspan></text>
+    <text x="428" y="436.0" xml:space="preserve"><tspan class="term-key">. Skill-match: </tspan><tspan class="term-dot">.............</tspan><tspan class="term-val"> job-tailored CV builder</tspan></text>
+    <text x="428" y="455.0" xml:space="preserve"><tspan class="term-key">. Writing: </tspan><tspan class="term-dot">.............</tspan><tspan class="term-val"> Go articles with benchmarks</tspan></text>
+    <text x="428" y="493.0" xml:space="preserve"><tspan class="term-sec">- Contact </tspan><tspan class="term-rule">------------------------------------------</tspan></text>
+    <text x="428" y="512.0" xml:space="preserve"><tspan class="term-key">. GitHub: </tspan><tspan class="term-dot">....................................</tspan><tspan class="term-val"> frihk</tspan></text>
+    <text x="428" y="531.0" xml:space="preserve"><tspan class="term-key">. dev.to: </tspan><tspan class="term-dot">....................................</tspan><tspan class="term-val"> frihk</tspan></text>
+    <text x="428" y="550.0" xml:space="preserve"><tspan class="term-key">. LinkedIn: </tspan><tspan class="term-dot">...............................</tspan><tspan class="term-val"> TODO_URL</tspan></text>
+    <text x="428" y="569.0" xml:space="preserve"><tspan class="term-key">. Email: </tspan><tspan class="term-dot">......................</tspan><tspan class="term-val"> frihkian05@gmail.com</tspan></text>
+    <text x="428" y="607.0" xml:space="preserve"><tspan class="term-sec">- GitHub Stats </tspan><tspan class="term-rule">-------------------------------------</tspan></text>
+    <text x="428" y="626.0" xml:space="preserve"><tspan class="term-key">Repos: .... 41 {Contributed: 0}</tspan><tspan class="term-dot"> .... </tspan><tspan class="term-val">Stars: ..... 0</tspan></text>
+    <text x="428" y="645.0" xml:space="preserve"><tspan class="term-key">Commits: .... 1,513</tspan><tspan class="term-dot"> ............ </tspan><tspan class="term-val">Followers: ..... 5</tspan></text>
+    <text x="428" y="664.0" xml:space="preserve"><tspan class="term-key">First: .... 2024-05-07</tspan><tspan class="term-dot"> .... </tspan><tspan class="term-val">Member: .... 2023-08-14</tspan></text>
+    <text x="428" y="683.0" xml:space="preserve"><tspan class="term-key">Lines of Code: .... </tspan><tspan class="term-val">48,210</tspan> <tspan class="term-dot">(</tspan> <tspan class="term-add">54,120++</tspan><tspan class="term-dot">, </tspan><tspan class="term-del">5,910--</tspan> <tspan class="term-dot">)</tspan></text>
+  </g>
+</svg>
