@@ -19,22 +19,22 @@
 
   <!-- Stacked Language Progress Bar -->
   <g clip-path="url(#bar-clip)">
-    <rect x="20.00" y="22.0" width="116.61" height="10.0" fill="#00ADD8"/>
-    <rect x="136.61" y="22.0" width="75.39" height="10.0" fill="#f1e05a"/>
-    <rect x="212.00" y="22.0" width="57.45" height="10.0" fill="#3572A5"/>
-    <rect x="269.45" y="22.0" width="26.37" height="10.0" fill="#3178c6"/>
-    <rect x="295.82" y="22.0" width="15.36" height="10.0" fill="#563d7c"/>
-    <rect x="311.18" y="22.0" width="8.82" height="10.0" fill="#e34c26"/>
+    <rect x="20.00" y="22.0" width="114.66" height="10.0" fill="#00ADD8"/>
+    <rect x="134.66" y="22.0" width="76.56" height="10.0" fill="#f1e05a"/>
+    <rect x="211.22" y="22.0" width="57.45" height="10.0" fill="#3572A5"/>
+    <rect x="268.67" y="22.0" width="26.79" height="10.0" fill="#3178c6"/>
+    <rect x="295.46" y="22.0" width="15.60" height="10.0" fill="#563d7c"/>
+    <rect x="311.06" y="22.0" width="8.94" height="10.0" fill="#e34c26"/>
   </g>
 
   <!-- Compact 2-Column Legend -->
   <g transform="translate(20, 58)">
     <circle cx="5" cy="-4" r="5" fill="#00ADD8"/>
-    <text class="lang-name" x="16" y="0">Go <tspan class="lang-pct">38.87%</tspan></text>
+    <text class="lang-name" x="16" y="0">Go <tspan class="lang-pct">38.22%</tspan></text>
   </g>
   <g transform="translate(175, 58)">
     <circle cx="5" cy="-4" r="5" fill="#f1e05a"/>
-    <text class="lang-name" x="16" y="0">JavaScript <tspan class="lang-pct">25.13%</tspan></text>
+    <text class="lang-name" x="16" y="0">JavaScript <tspan class="lang-pct">25.52%</tspan></text>
   </g>
   <g transform="translate(20, 86)">
     <circle cx="5" cy="-4" r="5" fill="#3572A5"/>
@@ -42,14 +42,14 @@
   </g>
   <g transform="translate(175, 86)">
     <circle cx="5" cy="-4" r="5" fill="#3178c6"/>
-    <text class="lang-name" x="16" y="0">TypeScript <tspan class="lang-pct">8.79%</tspan></text>
+    <text class="lang-name" x="16" y="0">TypeScript <tspan class="lang-pct">8.93%</tspan></text>
   </g>
   <g transform="translate(20, 114)">
     <circle cx="5" cy="-4" r="5" fill="#563d7c"/>
-    <text class="lang-name" x="16" y="0">CSS <tspan class="lang-pct">5.12%</tspan></text>
+    <text class="lang-name" x="16" y="0">CSS <tspan class="lang-pct">5.20%</tspan></text>
   </g>
   <g transform="translate(175, 114)">
     <circle cx="5" cy="-4" r="5" fill="#e34c26"/>
-    <text class="lang-name" x="16" y="0">HTML <tspan class="lang-pct">2.94%</tspan></text>
+    <text class="lang-name" x="16" y="0">HTML <tspan class="lang-pct">2.98%</tspan></text>
   </g>
 </svg>
