@@ -123,8 +123,8 @@ def fetch_stats_via_rest(username: str) -> dict:
     created_date = created_at_str.split("T")[0]
 
     # Find earliest commit among top repositories
-    earliest_date = "2024-05-07"
-    earliest_repo = "css"
+    earliest_date = None
+    earliest_repo = None
     for r in repos[:10]:
         rname = r.get("name")
         c_res = requests.get(
@@ -136,34 +136,34 @@ def fetch_stats_via_rest(username: str) -> dict:
             c_data = c_res.json()
             if isinstance(c_data, list):
                 for c in c_data:
-                    dt = c.get("commit", {}).get("author", {}).get("date", "")
-                    if dt and dt < earliest_date:
-                        earliest_date = dt.split("T")[0]
+                    dt = c.get("commit", {}).get("author", {}).get("date", "")[:10]
+                    if dt and (earliest_date is None or dt < earliest_date):
+                        earliest_date = dt
                         earliest_repo = rname
 
     # Public contribution calendar
     total_contribs, current_streak, longest_streak, weeks = fetch_public_contributions(username)
 
     # Calculate uptime
-    first_commit_dt = datetime.strptime(earliest_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
-    uptime_str = compute_uptime(first_commit_dt)
+    uptime_str = None
+    if earliest_date:
+        first_commit_dt = datetime.strptime(earliest_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        uptime_str = compute_uptime(first_commit_dt)
 
+    # Without a token, all-time commits and lines of code cannot be measured;
+    # leave them as None so the card omits those rows instead of guessing.
     return {
         "user": username,
         "repos": repo_count,
         "contributed": 0,
         "stars": total_stars,
-        "commits": total_contribs if total_contribs > 0 else 1513,
+        "commits": None,
         "followers": followers,
         "first_commit": earliest_date,
         "first_commit_repo": earliest_repo,
         "member_since": created_date,
         "uptime": uptime_str,
-        "lines_of_code": {
-            "total": 48210,
-            "additions": 54120,
-            "deletions": 5910
-        },
+        "lines_of_code": None,
         "contributions_last_year": total_contribs,
         "current_streak": current_streak,
         "longest_streak": longest_streak,

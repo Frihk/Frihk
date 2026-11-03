@@ -76,236 +76,343 @@ def render_row(key: str, value: str, width: int = 52, min_dots: int = 3) -> list
 
     return res
 
-def build_terminal_card(theme_key: str, stats: dict, portrait_lines: list[str]) -> str:
+PORTRAIT_SVG_DEFAULT = "portrait.svg"
+# Columns of portrait.svg's 220-column art to keep. The face sits roughly in
+# columns 55-185; trimming the outer shoulders lets the portrait sit beside
+# the info column at a readable size.
+PORTRAIT_COL_START = 40
+PORTRAIT_COL_END = 180
+
+# Geometry of the info column (character-count based; textLength pins every
+# row to the same pixel width so alignment does not depend on the viewer's font)
+INFO_COLS = 62
+INFO_FONT = 15.0
+INFO_CHAR_W = 8.8
+LINE_PITCH = 21.0
+PAD = 30
+GAP = 38
+BAR_H = 40
+
+# Ratios taken from portrait.svg (font 6.31px, pitch 7.28px, char width 3.8px)
+P_FONT_RATIO = 6.31 / 7.28
+P_CHAR_RATIO = 3.8 / 7.28
+
+
+def load_portrait_svg(path, col_start=PORTRAIT_COL_START, col_end=PORTRAIT_COL_END):
+    """Read the coloured ASCII art out of portrait.svg.
+
+    Returns a list of rows; each row is a list of (tone_index, text) runs where
+    tone_index 0..4 maps to the c0..c4 classes of the original file.
+    """
+    import html
+    import re
+
+    svg = Path(path).read_text(encoding="utf-8")
+    art = re.search(r'<g id="art"[^>]*>(.*?)</g>', svg, re.S)
+    body = art.group(1) if art else svg
+    rows = []
+    for text_body in re.findall(r"<text[^>]*>(.*?)</text>", body, re.S):
+        chars = []
+        for cls, run in re.findall(r'<tspan class="c(\d)">(.*?)</tspan>', text_body, re.S):
+            for ch in html.unescape(run):
+                chars.append((int(cls), ch))
+        if chars:
+            rows.append(chars)
+    if not rows:
+        raise ValueError(f"No portrait art found in {path}")
+    width = max(len(r) for r in rows)
+    cropped = []
+    for r in rows:
+        r = r + [(0, " ")] * (width - len(r))
+        r = r[col_start:col_end]
+        runs = []
+        for tone, ch in r:
+            if runs and (runs[-1][0] == tone or ch == " "):
+                runs[-1] = (runs[-1][0], runs[-1][1] + ch)
+            else:
+                runs.append((tone, ch))
+        cropped.append(runs)
+    return cropped
+
+
+def _normalise_portrait(portrait):
+    """Accept rows of plain strings or rows of (tone, text) runs."""
+    rows = []
+    for row in portrait:
+        if isinstance(row, str):
+            rows.append([(2, row)])
+        else:
+            rows.append(list(row))
+    cols = max(sum(len(t) for _, t in r) for r in rows)
+    padded = []
+    for r in rows:
+        n = sum(len(t) for _, t in r)
+        if n < cols:
+            r = r + [(0, " " * (cols - n))]
+        padded.append(r)
+    return padded, cols
+
+
+def render_pair(k1, v1, k2, v2, width, right_w=None, min_dots=3):
+    """Two `key: ... value` cells on one row, separated by ' | '.
+
+    The separator column is fixed by right_w so stacked pair rows line up.
+    Returns a list of (class, text) segments totalling exactly `width` chars.
+    """
+    left_min = len(k1) + 2 + min_dots + 1 + len(v1)
+    right_min = len(k2) + 2 + min_dots + 1 + len(v2)
+    if right_w is None or right_w < right_min:
+        right_w = right_min
+    left_w = width - 3 - right_w
+    if left_w < left_min:
+        left_w = left_min
+        right_w = width - 3 - left_w
+    if right_w < right_min:
+        raise ValueError(f"Pair row too long for width {width}: {k1}/{k2}")
+    ld = "." * (left_w - (len(k1) + 2 + 1 + len(v1)))
+    rd = "." * (right_w - (len(k2) + 2 + 1 + len(v2)))
+    return [
+        ("key", f"{k1}: "), ("dot", ld), ("val", f" {v1}"),
+        ("sep", " | "),
+        ("key", f"{k2}: "), ("dot", rd), ("val", f" {v2}"),
+    ]
+
+
+def build_info_rows(stats: dict, width: int = INFO_COLS) -> list:
+    """Assemble the right-hand column as rows of (class, text) segments."""
+    rows = []
+
+    def detail(key, value):
+        if value in (None, ""):
+            return
+        for p, d, v in render_row(key, str(value), width):
+            if p:
+                rows.append([("pre", p[:2]), ("key", p[2:]), ("dot", d), ("val", v)])
+            else:
+                rows.append([("dot", d), ("val", v)])
+
+    def section(title):
+        label = f"- {title} "
+        rows.append([("pre", "- "), ("sec", f"{title} "), ("rule", "─" * (width - len(label)))])
+
+    def blank():
+        rows.append([])
+
+    user, host = "ian", "kimani"
+    rows.append([
+        ("hdr", user), ("at", "@"), ("hdr", host),
+        ("rule", " " + "─" * (width - len(user) - len(host) - 2)),
+    ])
+    detail("Role", "junior software developer")
+    detail("Location", "Kisumu, Kenya")
+    detail("Background", "Physics (physicist by training)")
+    detail("Training", "Zone01 · 01 Edu network")
+    detail("Program", "Mastercard Foundation Associates")
+    detail("Uptime", stats.get("uptime"))
+    detail("Focus", "backend-focused, complete products")
+
+    blank()
+    section("Stack")
+    detail("Languages.Programming", "Go, JavaScript, Python")
+    detail("Frontend", "React, Next.js")
+    detail("Backend/ML", "FastAPI, YOLO")
+    detail("Languages.Real", "English")
+
+    blank()
+    section("Projects")
+    detail("Detecto", "counts people in live video")
+    detail("Guidely", "answers from a company's own docs")
+    detail("WeatherAI Gateway", "keeps a weather API in quota")
+    detail("Skill-match", "tailors your CV to the job")
+    detail("Writing", "Go articles on dev.to, benchmarked")
+
+    blank()
+    section("Contact")
+    detail("GitHub", "frihk")
+    detail("dev.to", "frihk")
+    detail("LinkedIn", "TODO_URL")
+    detail("Email", "frihkian05@gmail.com")
+
+    blank()
+    section("GitHub Stats")
+
+    def fmt(n):
+        return f"{n:,}" if isinstance(n, int) else None
+
+    repos, stars = fmt(stats.get("repos")), fmt(stats.get("stars"))
+    contributed = fmt(stats.get("contributed"))
+    commits, followers = fmt(stats.get("commits")), fmt(stats.get("followers"))
+    first, joined = stats.get("first_commit"), stats.get("member_since")
+    if repos and contributed and stats.get("contributed"):
+        repos = f"{repos} {{Contributed: {contributed}}}"
+
+    pairs = [("Repos", repos, "Stars", stars),
+             ("Commits", commits, "Followers", followers),
+             ("First commit", first, "Member since", joined)]
+    full = [p for p in pairs if p[1] and p[3]]
+    right_w = max((len(k2) + 6 + len(v2) for _, _, k2, v2 in full), default=None)
+    for k1, v1, k2, v2 in pairs:
+        if v1 and v2:
+            rows.append(render_pair(k1, v1, k2, v2, width, right_w))
+        else:
+            for k, v in ((k1, v1), (k2, v2)):
+                if v:
+                    p, d, val = render_row(k, v, width)[0]
+                    rows.append([("key", p[2:]), ("dot", ".." + d), ("val", val)])
+
+    loc = stats.get("lines_of_code") or {}
+    if all(isinstance(loc.get(k), int) for k in ("total", "additions", "deletions")):
+        key = "Lines of Code on GitHub: "
+        tail = [("val", f" {loc['total']:,} "), ("sep", "( "),
+                ("add", f"{loc['additions']:,}++"), ("sep", ", "),
+                ("del", f"{loc['deletions']:,}--"), ("sep", " )")]
+        used = len(key) + sum(len(t) for _, t in tail)
+        rows.append([("key", key), ("dot", "." * (width - used))] + tail)
+
+    for r in rows:
+        if r and sum(len(t) for _, t in r) != width:
+            raise ValueError(f"Info row is not {width} columns: {''.join(t for _, t in r)!r}")
+    return rows
+
+
+def build_terminal_card(theme_key: str, stats: dict, portrait) -> str:
     """Generate the terminal card SVG for the given theme."""
     t = THEMES[theme_key]
-    width = 900
-    height = 720
-    info_width = 52
+    rows = build_info_rows(stats, INFO_COLS)
+    p_rows, p_cols = _normalise_portrait(portrait)
 
-    # Prepare info column rows
-    repos_cnt = stats.get("repos", 41)
-    contributed_cnt = stats.get("contributed", 0)
-    stars_cnt = stats.get("stars", 0)
-    commits_cnt = f"{stats.get('commits', 1513):,}"
-    followers_cnt = stats.get("followers", 5)
-    first_commit_date = stats.get("first_commit", "2024-05-07")
-    member_since_date = stats.get("member_since", "2023-08-14")
-    uptime_val = stats.get("uptime", "2 years, 5 months, 25 days")
-    loc = stats.get("lines_of_code", {})
-    loc_total = f"{loc.get('total', 48210):,}"
-    loc_add = f"{loc.get('additions', 54120):,}"
-    loc_del = f"{loc.get('deletions', 5910):,}"
+    first_y = BAR_H + 34
+    span = (len(rows) - 1) * LINE_PITCH
+    # Portrait rows are stretched to span exactly the same height as the info column
+    p_pitch = span / max(1, len(p_rows) - 1)
+    p_font = p_pitch * P_FONT_RATIO
+    p_char = p_pitch * P_CHAR_RATIO
+    p_width = p_cols * p_char
+    info_x = PAD + p_width + GAP
+    info_w = INFO_COLS * INFO_CHAR_W
+    width = round(info_x + info_w + PAD)
+    height = round(first_y + span + 34)
 
-    # Construct the 33 info lines
-    rows = []
-    # 0. Header
-    hdr_title = "ian@kimani"
-    rule_len = info_width - len(hdr_title) - 1
-    rows.append({"type": "header", "title": hdr_title, "rule": "-" * rule_len})
-
-    # Identity
-    for p, d, v in render_row("Role", "junior software developer", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Location", "Kisumu, Kenya", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Background", "Physicist by training", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Training", "Zone01 · 01 Edu (peer-bootcamp)", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Program", "Mastercard Foundation (EA)", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Uptime", uptime_val, info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Focus", "backend-focused, complete products", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-
-    # Blank separator
-    rows.append({"type": "blank"})
-
-    # Stack
-    sec_title = "- Stack "
-    rows.append({"type": "section", "title": sec_title, "rule": "-" * (info_width - len(sec_title))})
-    for p, d, v in render_row("Languages.Programming", "Go, JavaScript, Python", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Frontend", "React, Next.js", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Backend/ML", "FastAPI, YOLO", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Languages.Real", "English", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-
-    # Blank separator
-    rows.append({"type": "blank"})
-
-    # Projects
-    sec_title = "- Projects "
-    rows.append({"type": "section", "title": sec_title, "rule": "-" * (info_width - len(sec_title))})
-    for p, d, v in render_row("Detecto", "live video people count (FastAPI)", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Guidely", "answers questions from docs", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("WeatherAI Gateway", "smart caching within quota", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Skill-match", "job-tailored CV builder", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Writing", "Go articles with benchmarks", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-
-    # Blank separator
-    rows.append({"type": "blank"})
-
-    # Contact
-    sec_title = "- Contact "
-    rows.append({"type": "section", "title": sec_title, "rule": "-" * (info_width - len(sec_title))})
-    for p, d, v in render_row("GitHub", "frihk", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("dev.to", "frihk", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("LinkedIn", "TODO_URL", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-    for p, d, v in render_row("Email", "frihkian05@gmail.com", info_width):
-        rows.append({"type": "detail", "key": p, "dots": d, "val": v})
-
-    # Blank separator
-    rows.append({"type": "blank"})
-
-    # GitHub Stats
-    sec_title = "- GitHub Stats "
-    rows.append({"type": "section", "title": sec_title, "rule": "-" * (info_width - len(sec_title))})
-    
-    # Custom stats lines with dots
-    stat1_left = f"Repos: .... {repos_cnt} {{Contributed: {contributed_cnt}}}"
-    stat1_right = f"Stars: ..... {stars_cnt}"
-    stat1_dots = "." * (info_width - len(stat1_left) - len(stat1_right) - 3)
-    rows.append({"type": "stats_custom", "left": stat1_left, "dots": f" {stat1_dots} ", "right": stat1_right})
-
-    stat2_left = f"Commits: .... {commits_cnt}"
-    stat2_right = f"Followers: ..... {followers_cnt}"
-    stat2_dots = "." * (info_width - len(stat2_left) - len(stat2_right) - 3)
-    rows.append({"type": "stats_custom", "left": stat2_left, "dots": f" {stat2_dots} ", "right": stat2_right})
-
-    stat3_left = f"First: .... {first_commit_date}"
-    stat3_right = f"Member: .... {member_since_date}"
-    stat3_dots = "." * (info_width - len(stat3_left) - len(stat3_right) - 3)
-    rows.append({"type": "stats_custom", "left": stat3_left, "dots": f" {stat3_dots} ", "right": stat3_right})
-
-    # LOC line with green additions and red deletions
-    rows.append({
-        "type": "stats_loc",
-        "prefix": "Lines of Code: .... ",
-        "total": loc_total,
-        "add": f"{loc_add}++",
-        "del": f"{loc_del}--",
-    })
-
-    # Assemble SVG text nodes
-    portrait_svg_lines = []
-    start_y = 75
-    line_pitch = 19.0
-
-    for i, pline in enumerate(portrait_lines[:33]):
-        y = start_y + i * line_pitch
-        escaped_line = escape(pline)
-        portrait_svg_lines.append(
-            f'    <text x="24" y="{y:.1f}" xml:space="preserve">{escaped_line}</text>'
+    # Portrait
+    p_lines = []
+    for i, runs in enumerate(p_rows):
+        y = first_y + i * p_pitch
+        spans = "".join(f'<tspan class="c{tone}">{escape(text)}</tspan>' for tone, text in runs)
+        p_lines.append(
+            f'    <text x="{PAD}" y="{y:.2f}" textLength="{p_width:.1f}" '
+            f'lengthAdjust="spacing" xml:space="preserve">{spans}</text>'
         )
 
-    info_svg_lines = []
-    info_x = 428
-    for i, row in enumerate(rows[:33]):
-        y = start_y + i * line_pitch
-        rtype = row["type"]
-        if rtype == "header":
-            info_svg_lines.append(
-                f'    <text x="{info_x}" y="{y:.1f}" xml:space="preserve">'
-                f'<tspan class="term-hdr">{escape(row["title"])}</tspan> '
-                f'<tspan class="term-rule">{escape(row["rule"])}</tspan></text>'
-            )
-        elif rtype == "section":
-            info_svg_lines.append(
-                f'    <text x="{info_x}" y="{y:.1f}" xml:space="preserve">'
-                f'<tspan class="term-sec">{escape(row["title"])}</tspan>'
-                f'<tspan class="term-rule">{escape(row["rule"])}</tspan></text>'
-            )
-        elif rtype == "detail":
-            info_svg_lines.append(
-                f'    <text x="{info_x}" y="{y:.1f}" xml:space="preserve">'
-                f'<tspan class="term-key">{escape(row["key"])}</tspan>'
-                f'<tspan class="term-dot">{escape(row["dots"])}</tspan>'
-                f'<tspan class="term-val">{escape(row["val"])}</tspan></text>'
-            )
-        elif rtype == "stats_custom":
-            info_svg_lines.append(
-                f'    <text x="{info_x}" y="{y:.1f}" xml:space="preserve">'
-                f'<tspan class="term-key">{escape(row["left"])}</tspan>'
-                f'<tspan class="term-dot">{escape(row["dots"])}</tspan>'
-                f'<tspan class="term-val">{escape(row["right"])}</tspan></text>'
-            )
-        elif rtype == "stats_loc":
-            info_svg_lines.append(
-                f'    <text x="{info_x}" y="{y:.1f}" xml:space="preserve">'
-                f'<tspan class="term-key">{escape(row["prefix"])}</tspan>'
-                f'<tspan class="term-val">{escape(row["total"])}</tspan> '
-                f'<tspan class="term-dot">(</tspan> '
-                f'<tspan class="term-add">{escape(row["add"])}</tspan><tspan class="term-dot">, </tspan>'
-                f'<tspan class="term-del">{escape(row["del"])}</tspan> '
-                f'<tspan class="term-dot">)</tspan></text>'
-            )
-        elif rtype == "blank":
-            pass
+    # Info column
+    i_lines = []
+    for i, segs in enumerate(rows):
+        if not segs:
+            continue
+        y = first_y + i * LINE_PITCH
+        spans = "".join(f'<tspan class="{cls}">{escape(text)}</tspan>' for cls, text in segs)
+        i_lines.append(
+            f'    <text class="r" style="animation-delay:{0.25 + i * 0.045:.3f}s" '
+            f'x="{info_x:.1f}" y="{y:.1f}" textLength="{info_w:.1f}" '
+            f'lengthAdjust="spacing" xml:space="preserve">{spans}</text>'
+        )
 
-    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">
-  <title>Ian Kimani — Terminal Profile Card ({t["name"]})</title>
-  <desc>Neofetch-style terminal profile card displaying Ian Kimani's identity, technical stack, projects, and GitHub metrics.</desc>
+    # One-shot line-by-line reveal of the portrait (same technique as animate_portrait.py)
+    clip_top = first_y - p_pitch + 1.2
+    clip_h = len(p_rows) * p_pitch + 4
+    n = len(p_rows)
+    reveal_s = 2.6
+    glow_cx = PAD + p_width / 2
+    glow_cy = first_y + span * 0.42
+    c = t["portrait"]
+    ch = t["chrome"]
+    panel_svg = ""
+    panel_defs = ""
+    if t.get("panel"):
+        p_in, p_out, p_stroke = t["panel"]
+        panel_defs = (
+            f'<radialGradient id="panel" cx="50%" cy="30%" r="85%">'
+            f'<stop offset="0" stop-color="{p_in}"/><stop offset="1" stop-color="{p_out}"/></radialGradient>'
+        )
+        panel_svg = (
+            f'<rect x="{PAD - 14}" y="{BAR_H + 14}" width="{p_width + 28:.1f}" '
+            f'height="{height - BAR_H - 28}" rx="10" fill="url(#panel)" stroke="{p_stroke}"/>'
+        )
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-labelledby="title desc">
+  <title id="title">Ian Kimani — junior software developer, Kisumu, Kenya ({t["name"]})</title>
+  <desc id="desc">Neofetch-style terminal card: a blue ASCII-art portrait of Ian Kimani beside his role, location, stack (Go, JavaScript, Python, React, Next.js, FastAPI, YOLO), projects, contact details, and GitHub statistics.</desc>
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="25%" r="90%">
+      <stop offset="0" stop-color="{t["bg_inner"]}"/>
+      <stop offset="1" stop-color="{t["bg_outer"]}"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="{t["glow"]}" stop-opacity="{t["glow_opacity"]}"/>
+      <stop offset="1" stop-color="{t["glow"]}" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sweep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="{t["sweep"]}" stop-opacity="0"/>
+      <stop offset="1" stop-color="{t["sweep"]}" stop-opacity="0.35"/>
+    </linearGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1" fill="#000" opacity="{t["scanlines"]}"/>
+    </pattern>
+    <clipPath id="reveal"><rect id="reveal-rect" x="0" y="{clip_top:.2f}" width="{PAD + p_width + 4:.1f}" height="{clip_h:.2f}"/></clipPath>
+    {panel_defs}
+  </defs>
   <style>
-    text {{
-      font-family: {FONT_FAMILY};
-      text-rendering: geometricPrecision;
-    }}
-    .portrait {{
-      font-size: 11.5px;
-      fill: {t["portrait_color"]};
-      font-weight: 500;
-    }}
-    .info {{
-      font-size: 14.5px;
-      font-weight: 400;
-    }}
-    .term-hdr {{ fill: {t["header"]}; font-weight: 700; }}
-    .term-sec {{ fill: {t["section"]}; font-weight: 600; }}
-    .term-key {{ fill: {t["key"]}; font-weight: 500; }}
-    .term-dot {{ fill: {t["dots"]}; opacity: 0.85; }}
-    .term-val {{ fill: {t["value"]}; }}
-    .term-rule {{ fill: {t["rule"]}; }}
-    .term-add {{ fill: {t["additions"]}; font-weight: 600; }}
-    .term-del {{ fill: {t["deletions"]}; font-weight: 600; }}
-    .window-title {{ fill: {t["window_title"]}; font-size: 13px; font-weight: 500; }}
+    text {{ font-family: {FONT_FAMILY}; }}
+    .p text {{ font-size: {p_font:.2f}px; }}
+    .c0 {{ fill: {c[0]}; }} .c1 {{ fill: {c[1]}; }} .c2 {{ fill: {c[2]}; }} .c3 {{ fill: {c[3]}; }} .c4 {{ fill: {c[4]}; }}
+    .i text {{ font-size: {INFO_FONT}px; }}
+    .pre {{ fill: {t["prefix"]}; }}
+    .key {{ fill: {t["key"]}; }}
+    .dot {{ fill: {t["dots"]}; }}
+    .val {{ fill: {t["value"]}; }}
+    .sep {{ fill: {t["dots"]}; }}
+    .hdr {{ fill: {t["header"]}; font-weight: 700; }}
+    .at {{ fill: {t["at"]}; font-weight: 700; }}
+    .sec {{ fill: {t["section"]}; font-weight: 700; }}
+    .rule {{ fill: {t["rule"]}; }}
+    .add {{ fill: {t["additions"]}; font-weight: 600; }}
+    .del {{ fill: {t["deletions"]}; font-weight: 600; }}
+    .title {{ fill: {t["window_title"]}; font-size: 12.5px; }}
+    @keyframes reveal {{ from {{ transform: scaleY(0); }} to {{ transform: scaleY(1); }} }}
+    @keyframes sweep {{ 0% {{ transform: translateY(0); opacity: 0; }} 5% {{ opacity: .7; }} 95% {{ opacity: .7; }} 100% {{ transform: translateY({span:.1f}px); opacity: 0; }} }}
+    @keyframes fade {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+    #reveal-rect {{ transform-origin: 0 {clip_top:.2f}px; animation: reveal {reveal_s}s steps({n}, end) .3s 1 both; }}
+    .s {{ animation: sweep {reveal_s}s linear .3s 1 both; }}
+    .r {{ animation: fade .35s ease-out 1 both; }}
+    @media (prefers-reduced-motion: reduce) {{ #reveal-rect, .s, .r {{ animation: none; }} .s {{ opacity: 0; }} }}
   </style>
 
-  <!-- Terminal Window Background -->
-  <rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="{t["bg"]}" stroke="{t["border"]}" stroke-width="1"/>
+  <!-- window -->
+  <rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="url(#bg)" stroke="{t["border"]}"/>
+  <path d="M0.5 12.5a12 12 0 0 1 12-12h{width - 25}a12 12 0 0 1 12 12V{BAR_H}H0.5z" fill="{t["window_bar"]}"/>
+  <line x1="0" y1="{BAR_H + 0.5}" x2="{width}" y2="{BAR_H + 0.5}" stroke="{t["border"]}"/>
+  <circle cx="28" cy="21" r="5.5" fill="none" stroke="{ch[0]}" stroke-width="1.6"/>
+  <circle cx="48" cy="21" r="5.5" fill="none" stroke="{ch[1]}" stroke-width="1.6"/>
+  <circle cx="68" cy="21" r="5.5" fill="none" stroke="{ch[2]}" stroke-width="1.6"/>
+  <text class="title" x="{width / 2:.1f}" y="25" text-anchor="middle">ian@kimani — frihk</text>
 
-  <!-- Window Chrome Top Bar -->
-  <path d="M 0.5 12.5 A 12 12 0 0 1 12.5 0.5 L {width - 12.5} 0.5 A 12 12 0 0 1 {width - 0.5} 12.5 L {width - 0.5} 36.5 L 0.5 36.5 Z" fill="{t["window_bar"]}"/>
-  <circle cx="22" cy="18" r="6" fill="#ff5f56"/>
-  <circle cx="42" cy="18" r="6" fill="#ffbd2e"/>
-  <circle cx="62" cy="18" r="6" fill="#27c93f"/>
-  <text x="{width / 2}" y="23" text-anchor="middle" class="window-title">ian@kimani — frihk</text>
-  <line x1="0" y1="36.5" x2="{width}" y2="36.5" stroke="{t["border"]}" stroke-width="1"/>
+  <!-- soft glow behind the face -->
+  {panel_svg}
+  <ellipse cx="{glow_cx:.1f}" cy="{glow_cy:.1f}" rx="{p_width * 0.55:.1f}" ry="{span * 0.5:.1f}" fill="url(#glow)"/>
 
-  <!-- Left Column: ASCII Portrait -->
-  <g class="portrait">
-{chr(10).join(portrait_svg_lines)}
+  <!-- portrait -->
+  <g class="p" clip-path="url(#reveal)">
+{chr(10).join(p_lines)}
+  </g>
+  <rect class="s" x="{PAD}" y="{clip_top:.2f}" width="{p_width:.1f}" height="{p_pitch * 1.4:.2f}" fill="url(#sweep)"/>
+
+  <!-- info -->
+  <g class="i">
+{chr(10).join(i_lines)}
   </g>
 
-  <!-- Right Column: Info & Stats -->
-  <g class="info">
-{chr(10).join(info_svg_lines)}
-  </g>
+  <rect x="1" y="{BAR_H + 1}" width="{width - 2}" height="{height - BAR_H - 2}" rx="11" fill="url(#scan)" pointer-events="none"/>
 </svg>
 """
-    return svg_content
 
 def build_contributions_card(theme_key: str, stats: dict) -> str:
     """Generate the contribution heatmap SVG for the given theme."""
@@ -448,7 +555,10 @@ def validate_and_write_svg(svg_content: str, target_path: Path):
 def main():
     parser = argparse.ArgumentParser(description="Build neofetch SVG cards.")
     parser.add_argument("--stats-file", default="cache/stats.json", help="Path to stats JSON file")
-    parser.add_argument("--portrait-file", default="assets/portrait.txt", help="Path to ASCII portrait text")
+    parser.add_argument("--portrait-svg", default=PORTRAIT_SVG_DEFAULT,
+                        help="Coloured ASCII portrait SVG to embed (default: portrait.svg)")
+    parser.add_argument("--portrait-file", default="assets/portrait.txt",
+                        help="Plain-text ASCII fallback used if --portrait-svg is missing")
     parser.add_argument("--output-dir", default=".", help="Directory to save generated SVGs")
 
     args = parser.parse_args()
@@ -461,12 +571,15 @@ def main():
     with open(stats_path, "r", encoding="utf-8") as f:
         stats = json.load(f)
 
+    svg_path = Path(args.portrait_svg)
     portrait_path = Path(args.portrait_file)
-    if not portrait_path.exists():
-        print(f"Error: Portrait file {portrait_path} does not exist.", file=sys.stderr)
+    if svg_path.exists():
+        portrait_lines = load_portrait_svg(svg_path)
+    elif portrait_path.exists():
+        portrait_lines = [l.rstrip("\r\n") for l in portrait_path.read_text(encoding="utf-8").splitlines()]
+    else:
+        print(f"Error: neither {svg_path} nor {portrait_path} exists.", file=sys.stderr)
         sys.exit(1)
-
-    portrait_lines = [l.rstrip("\r\n") for l in portrait_path.read_text(encoding="utf-8").splitlines()]
 
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
