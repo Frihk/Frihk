@@ -38,16 +38,6 @@ THEMES = {
         "section": "#93c8ff",
         "additions": "#5eead4",
         "deletions": "#ff8fa3",
-        # Contribution calendar
-        "cal_bg": "#161b22",
-        "cal_border": "#30363d",
-        "cal_text": "#c9d1d9",
-        "cal_muted": "#8b949e",
-        "cal_level0": "#21262d",
-        "cal_level1": "#0e4429",
-        "cal_level2": "#006d32",
-        "cal_level3": "#26a641",
-        "cal_level4": "#39d353",
     },
     "light": {
         "name": "Light Mode",
@@ -76,15 +66,5 @@ THEMES = {
         "section": "#1f4c9e",
         "additions": "#0f7b6c",
         "deletions": "#c0365a",
-        # Contribution calendar
-        "cal_bg": "#ffffff",
-        "cal_border": "#d0d7de",
-        "cal_text": "#24292f",
-        "cal_muted": "#57606a",
-        "cal_level0": "#ebedf0",
-        "cal_level1": "#9be9a8",
-        "cal_level2": "#40c463",
-        "cal_level3": "#30a14e",
-        "cal_level4": "#216e39",
     },
 }

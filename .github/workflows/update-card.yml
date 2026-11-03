@@ -47,7 +47,7 @@ jobs:
         run: |
           python scripts/github_stats.py --user frihk --output cache/stats.json
 
-      - name: Build terminal cards & heatmaps
+      - name: Build terminal and statistics cards
         run: |
           python scripts/build_card.py --stats-file cache/stats.json --portrait-file assets/portrait.txt --output-dir .
 
@@ -59,7 +59,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add dark_mode.svg light_mode.svg contributions_dark.svg contributions_light.svg cache/stats.json
+          git add dark_mode.svg light_mode.svg stats_dark.svg stats_light.svg top_langs_dark.svg top_langs_light.svg cache/stats.json
           if git diff --staged --quiet; then
             echo "No changes in generated cards or stats."
           else

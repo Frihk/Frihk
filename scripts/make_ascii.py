@@ -97,7 +97,7 @@ def main():
         description="Generate deterministic ASCII portrait for neofetch terminal card."
     )
     parser.add_argument("--source", type=str, help="Path to input image file (PNG/JPG)")
-    parser.add_argument("--text-source", type=str, default="portrait.txt", help="Path to existing ASCII text file")
+    parser.add_argument("--text-source", type=str, default="assets/portrait.txt", help="Path to existing ASCII text file")
     parser.add_argument("--output", type=str, default="assets/portrait.txt", help="Path to output text file")
     parser.add_argument("--columns", type=int, default=52, help="Output columns (width in characters)")
     parser.add_argument("--rows", type=int, default=34, help="Output rows (height in lines)")

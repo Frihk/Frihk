@@ -2,12 +2,12 @@
 """
 scripts/build_card.py:
 Generates neofetch-style terminal cards (dark_mode.svg, light_mode.svg)
-and contribution heatmaps (contributions_dark.svg, contributions_light.svg).
+and self-hosted GitHub statistics & top-languages cards
+(stats_dark.svg, stats_light.svg, top_langs_dark.svg, top_langs_light.svg).
 All SVGs are fully self-contained, valid XML, and contrast-checked.
 """
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -18,6 +18,22 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from templates.theme_tokens import THEMES
 
 FONT_FAMILY = "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"
+SANS_FONT_FAMILY = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+
+LANGUAGE_COLORS = {
+    "Go": "#00ADD8",
+    "JavaScript": "#f1e05a",
+    "Python": "#3572A5",
+    "TypeScript": "#3178c6",
+    "CSS": "#563d7c",
+    "HTML": "#e34c26",
+    "Shell": "#89e051",
+    "Solidity": "#AA6746",
+    "Rust": "#dea584",
+    "C": "#555555",
+    "C++": "#f34b7d",
+}
+
 
 def render_row(key: str, value: str, width: int = 52, min_dots: int = 3) -> list[tuple[str, str, str]]:
     """
@@ -76,34 +92,25 @@ def render_row(key: str, value: str, width: int = 52, min_dots: int = 3) -> list
 
     return res
 
+
 PORTRAIT_SVG_DEFAULT = "portrait.svg"
-# Columns of portrait.svg's 220-column art to keep. The face sits roughly in
-# columns 55-185; trimming the outer shoulders lets the portrait sit beside
-# the info column at a readable size.
 PORTRAIT_COL_START = 40
 PORTRAIT_COL_END = 180
 
-# Geometry of the info column (character-count based; textLength pins every
-# row to the same pixel width so alignment does not depend on the viewer's font)
 INFO_COLS = 62
 INFO_FONT = 15.0
 INFO_CHAR_W = 8.8
-LINE_PITCH = 21.0
+LINE_PITCH = 24.5
 PAD = 30
 GAP = 38
 BAR_H = 40
 
-# Ratios taken from portrait.svg (font 6.31px, pitch 7.28px, char width 3.8px)
 P_FONT_RATIO = 6.31 / 7.28
 P_CHAR_RATIO = 3.8 / 7.28
 
 
 def load_portrait_svg(path, col_start=PORTRAIT_COL_START, col_end=PORTRAIT_COL_END):
-    """Read the coloured ASCII art out of portrait.svg.
-
-    Returns a list of rows; each row is a list of (tone_index, text) runs where
-    tone_index 0..4 maps to the c0..c4 classes of the original file.
-    """
+    """Read the coloured ASCII art out of portrait.svg."""
     import html
     import re
 
@@ -153,31 +160,6 @@ def _normalise_portrait(portrait):
     return padded, cols
 
 
-def render_pair(k1, v1, k2, v2, width, right_w=None, min_dots=3):
-    """Two `key: ... value` cells on one row, separated by ' | '.
-
-    The separator column is fixed by right_w so stacked pair rows line up.
-    Returns a list of (class, text) segments totalling exactly `width` chars.
-    """
-    left_min = len(k1) + 2 + min_dots + 1 + len(v1)
-    right_min = len(k2) + 2 + min_dots + 1 + len(v2)
-    if right_w is None or right_w < right_min:
-        right_w = right_min
-    left_w = width - 3 - right_w
-    if left_w < left_min:
-        left_w = left_min
-        right_w = width - 3 - left_w
-    if right_w < right_min:
-        raise ValueError(f"Pair row too long for width {width}: {k1}/{k2}")
-    ld = "." * (left_w - (len(k1) + 2 + 1 + len(v1)))
-    rd = "." * (right_w - (len(k2) + 2 + 1 + len(v2)))
-    return [
-        ("key", f"{k1}: "), ("dot", ld), ("val", f" {v1}"),
-        ("sep", " | "),
-        ("key", f"{k2}: "), ("dot", rd), ("val", f" {v2}"),
-    ]
-
-
 def build_info_rows(stats: dict, width: int = INFO_COLS) -> list:
     """Assemble the right-hand column as rows of (class, text) segments."""
     rows = []
@@ -203,12 +185,12 @@ def build_info_rows(stats: dict, width: int = INFO_COLS) -> list:
         ("hdr", user), ("at", "@"), ("hdr", host),
         ("rule", " " + "─" * (width - len(user) - len(host) - 2)),
     ])
-    detail("Role", "junior software developer")
+    detail("Role", "Software developer")
     detail("Location", "Kisumu, Kenya")
     detail("Background", "Physics (physicist by training)")
     detail("Training", "Zone01 · 01 Edu network")
     detail("Program", "Mastercard Foundation Associates")
-    detail("Uptime", stats.get("uptime"))
+    detail("Uptime", stats.get("uptime") or "1 year")
     detail("Focus", "backend-focused, complete products")
 
     blank()
@@ -216,7 +198,7 @@ def build_info_rows(stats: dict, width: int = INFO_COLS) -> list:
     detail("Languages.Programming", "Go, JavaScript, Python")
     detail("Frontend", "React, Next.js")
     detail("Backend/ML", "FastAPI, YOLO")
-    detail("Languages.Real", "English")
+    detail("Languages.Real", "English, Swahili")
 
     blank()
     section("Projects")
@@ -230,44 +212,7 @@ def build_info_rows(stats: dict, width: int = INFO_COLS) -> list:
     section("Contact")
     detail("GitHub", "frihk")
     detail("dev.to", "frihk")
-    detail("LinkedIn", "TODO_URL")
-    detail("Email", "frihkian05@gmail.com")
-
-    blank()
-    section("GitHub Stats")
-
-    def fmt(n):
-        return f"{n:,}" if isinstance(n, int) else None
-
-    repos, stars = fmt(stats.get("repos")), fmt(stats.get("stars"))
-    contributed = fmt(stats.get("contributed"))
-    commits, followers = fmt(stats.get("commits")), fmt(stats.get("followers"))
-    first, joined = stats.get("first_commit"), stats.get("member_since")
-    if repos and contributed and stats.get("contributed"):
-        repos = f"{repos} {{Contributed: {contributed}}}"
-
-    pairs = [("Repos", repos, "Stars", stars),
-             ("Commits", commits, "Followers", followers),
-             ("First commit", first, "Member since", joined)]
-    full = [p for p in pairs if p[1] and p[3]]
-    right_w = max((len(k2) + 6 + len(v2) for _, _, k2, v2 in full), default=None)
-    for k1, v1, k2, v2 in pairs:
-        if v1 and v2:
-            rows.append(render_pair(k1, v1, k2, v2, width, right_w))
-        else:
-            for k, v in ((k1, v1), (k2, v2)):
-                if v:
-                    p, d, val = render_row(k, v, width)[0]
-                    rows.append([("key", p[2:]), ("dot", ".." + d), ("val", val)])
-
-    loc = stats.get("lines_of_code") or {}
-    if all(isinstance(loc.get(k), int) for k in ("total", "additions", "deletions")):
-        key = "Lines of Code on GitHub: "
-        tail = [("val", f" {loc['total']:,} "), ("sep", "( "),
-                ("add", f"{loc['additions']:,}++"), ("sep", ", "),
-                ("del", f"{loc['deletions']:,}--"), ("sep", " )")]
-        used = len(key) + sum(len(t) for _, t in tail)
-        rows.append([("key", key), ("dot", "." * (width - used))] + tail)
+    detail("LinkedIn", "ian kimani")
 
     for r in rows:
         if r and sum(len(t) for _, t in r) != width:
@@ -283,7 +228,6 @@ def build_terminal_card(theme_key: str, stats: dict, portrait) -> str:
 
     first_y = BAR_H + 34
     span = (len(rows) - 1) * LINE_PITCH
-    # Portrait rows are stretched to span exactly the same height as the info column
     p_pitch = span / max(1, len(p_rows) - 1)
     p_font = p_pitch * P_FONT_RATIO
     p_char = p_pitch * P_CHAR_RATIO
@@ -316,7 +260,6 @@ def build_terminal_card(theme_key: str, stats: dict, portrait) -> str:
             f'lengthAdjust="spacing" xml:space="preserve">{spans}</text>'
         )
 
-    # One-shot line-by-line reveal of the portrait (same technique as animate_portrait.py)
     clip_top = first_y - p_pitch + 1.2
     clip_h = len(p_rows) * p_pitch + 4
     n = len(p_rows)
@@ -339,8 +282,8 @@ def build_terminal_card(theme_key: str, stats: dict, portrait) -> str:
         )
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-labelledby="title desc">
-  <title id="title">Ian Kimani — junior software developer, Kisumu, Kenya ({t["name"]})</title>
-  <desc id="desc">Neofetch-style terminal card: a blue ASCII-art portrait of Ian Kimani beside his role, location, stack (Go, JavaScript, Python, React, Next.js, FastAPI, YOLO), projects, contact details, and GitHub statistics.</desc>
+  <title id="title">Ian Kimani — Software developer, Kisumu, Kenya ({t["name"]})</title>
+  <desc id="desc">Neofetch-style terminal card: a blue ASCII-art portrait of Ian Kimani beside his role, location, stack (Go, JavaScript, Python, React, Next.js, FastAPI, YOLO), languages (English, Swahili), projects, and contact details.</desc>
   <defs>
     <radialGradient id="bg" cx="35%" cy="25%" r="90%">
       <stop offset="0" stop-color="{t["bg_inner"]}"/>
@@ -414,125 +357,198 @@ def build_terminal_card(theme_key: str, stats: dict, portrait) -> str:
 </svg>
 """
 
-def build_contributions_card(theme_key: str, stats: dict) -> str:
-    """Generate the contribution heatmap SVG for the given theme."""
+
+def build_stats_card(theme_key: str, stats: dict) -> str:
+    """
+    Generate the self-hosted GitHub statistics SVG card (matching github-readme-stats
+    with show_icons=true, hide_border=true, hide_title=true, bg_color=00000000).
+    """
     t = THEMES[theme_key]
-    width = 900
-    height = 200
+    width, height = 450, 170
 
-    weeks = stats.get("calendar_weeks", [])
-    total_contribs = stats.get("contributions_last_year", 1513)
-    curr_streak = stats.get("current_streak", 1)
-    long_streak = stats.get("longest_streak", 22)
-    first_commit = stats.get("first_commit", "2024-05-07")
-    member_since = stats.get("member_since", "2023-08-14")
+    commits = stats.get("commits") if isinstance(stats.get("commits"), int) else 1513
+    prs = stats.get("prs") if isinstance(stats.get("prs"), int) else 30
+    issues = stats.get("issues") if isinstance(stats.get("issues"), int) else 42
+    repos = stats.get("repos") if isinstance(stats.get("repos"), int) else 41
+    followers = stats.get("followers") if isinstance(stats.get("followers"), int) else 5
 
-    # If no weeks provided in fixture, synthesize a realistic calendar
-    if not weeks:
-        weeks = []
-        for w in range(53):
-            week_days = []
-            for d in range(7):
-                lvl = 0 if (w * 7 + d) % 4 == 0 else ((w + d) % 4 + 1)
-                week_days.append({"level": lvl, "date": "2026-01-01"})
-            weeks.append(week_days)
+    label_color = t["value"]
+    icon_color = t["key"]
+    ring_color = t["chrome"][0]
+    ring_track = "#1f3358" if theme_key == "dark" else "#d8e3f5"
 
-    level_colors = {
-        0: t["cal_level0"],
-        1: t["cal_level1"],
-        2: t["cal_level2"],
-        3: t["cal_level3"],
-        4: t["cal_level4"],
-    }
+    # Octicon 16x16 paths
+    icon_commits = "M10.5 7.75a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm1.43.75a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5h-3.32Z"
+    icon_prs = "M7.177 3.073L9.573.677A.25.25 0 0 1 10 .854v4.792a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354zM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm-2.25.75a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25zM11 2.5h-1V4h1a1 1 0 0 1 1 1v5.628a2.251 2.251 0 1 0 1.5 0V5A2.5 2.5 0 0 0 11 2.5zm1 10.25a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0zM3.75 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5z"
+    icon_issues = "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0Z"
+    icon_repos = "M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8zM5 12.25v3.25a.25.25 0 0 0 .4.2l1.45-1.087a.249.249 0 0 1 .3 0L8.6 15.7a.25.25 0 0 0 .4-.2v-3.25a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25z"
+    icon_followers = "M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"
 
-    # Grid geometry
-    cell_size = 11
-    cell_gap = 3.5
-    start_x = 42
-    start_y = 66
+    items = [
+        (icon_commits, "Total Commits:", f"{commits:,}"),
+        (icon_prs, "Total PRs:", f"{prs:,}"),
+        (icon_issues, "Total Issues:", f"{issues:,}"),
+        (icon_repos, "Public Repos:", f"{repos:,}"),
+        (icon_followers, "Followers:", f"{followers:,}"),
+    ]
 
-    cells_svg = []
-    # Only render up to 53 weeks
-    for w_idx, week in enumerate(weeks[-53:]):
-        x = start_x + w_idx * (cell_size + cell_gap)
-        for d_idx, day in enumerate(week[:7]):
-            y = start_y + d_idx * (cell_size + cell_gap)
-            lvl = day.get("level", 0)
-            fill_col = level_colors.get(lvl, t["cal_level0"])
-            cells_svg.append(
-                f'    <rect x="{x:.1f}" y="{y:.1f}" width="{cell_size}" height="{cell_size}" rx="2.5" fill="{fill_col}"/>'
-            )
+    rows_svg = []
+    start_y = 22
+    row_gap = 28
+    for idx, (path_d, label, val) in enumerate(items):
+        y = start_y + idx * row_gap
+        delay = idx * 120
+        rows_svg.append(
+            f'  <g class="stagger" style="animation-delay: {delay}ms" transform="translate(20, {y})">\n'
+            f'    <svg x="0" y="-12" width="16" height="16" viewBox="0 0 16 16" fill="{icon_color}">\n'
+            f'      <path fill-rule="evenodd" d="{path_d}"/>\n'
+            f'    </svg>\n'
+            f'    <text class="stat-label" x="26" y="0">{escape(label)}</text>\n'
+            f'    <text class="stat-val" x="200" y="0">{escape(val)}</text>\n'
+            f'  </g>'
+        )
 
-    # Month labels
-    months = ["Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"]
-    month_svg = []
-    for i, m_name in enumerate(months):
-        mx = start_x + (i * 4.4) * (cell_size + cell_gap)
-        month_svg.append(f'    <text x="{mx:.1f}" y="56" class="cal-label">{m_name}</text>')
+    # Rank circle parameters (r=40 -> circumference ~251.3)
+    circumference = 251.3
+    progress_offset = 45.0
 
-    streak_plural_curr = "day" if curr_streak == 1 else "days"
-    streak_plural_long = "day" if long_streak == 1 else "days"
-
-    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">
-  <title>Ian Kimani — Contribution Heatmap ({t["name"]})</title>
-  <desc>GitHub contribution calendar heatmap showing activity, streaks, and milestone dates.</desc>
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-labelledby="stats-title stats-desc">
+  <title id="stats-title">Ian Kimani's GitHub Statistics ({t["name"]})</title>
+  <desc id="stats-desc">Total Commits: {commits:,}, Total PRs: {prs:,}, Total Issues: {issues:,}, Public Repos: {repos:,}, Followers: {followers:,}</desc>
   <style>
-    text {{
-      font-family: {FONT_FAMILY};
+    .stat-label {{
+      font: 600 14px {SANS_FONT_FAMILY};
+      fill: {label_color};
     }}
-    .cal-title {{
-      fill: {t["cal_text"]};
-      font-size: 15px;
-      font-weight: 700;
+    .stat-val {{
+      font: 700 14px {SANS_FONT_FAMILY};
+      fill: {label_color};
     }}
-    .cal-milestone {{
-      fill: {t["cal_muted"]};
-      font-size: 12.5px;
-      font-weight: 500;
+    .rank-text {{
+      font: 800 24px {SANS_FONT_FAMILY};
+      fill: {label_color};
     }}
-    .cal-label {{
-      fill: {t["cal_muted"]};
-      font-size: 11px;
+    .stagger {{
+      opacity: 0;
+      animation: fadeIn 0.35s ease-in-out forwards;
     }}
-    .cal-legend {{
-      fill: {t["cal_muted"]};
-      font-size: 11px;
+    .rank-progress {{
+      stroke-dasharray: {circumference};
+      stroke-dashoffset: {progress_offset};
+      transform: rotate(-90deg);
+      transform-origin: 355px 85px;
+      animation: rankAnim 1s forwards ease-in-out;
+    }}
+    @keyframes fadeIn {{
+      from {{ opacity: 0; transform: translate(15px, var(--y, 0)); }}
+      to {{ opacity: 1; }}
+    }}
+    @keyframes rankAnim {{
+      from {{ stroke-dashoffset: {circumference}; }}
+      to {{ stroke-dashoffset: {progress_offset}; }}
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      .stagger, .rank-progress {{ animation: none; opacity: 1; }}
     }}
   </style>
 
-  <!-- Heatmap Card Background -->
-  <rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="{t["cal_bg"]}" stroke="{t["cal_border"]}" stroke-width="1"/>
+{chr(10).join(rows_svg)}
 
-  <!-- Header & Milestones -->
-  <text x="24" y="28" class="cal-title">{total_contribs:,} contributions in the last year</text>
-  <text x="24" y="44" class="cal-milestone">Current streak: {curr_streak} {streak_plural_curr}  •  Longest streak: {long_streak} {streak_plural_long}  •  First commit: {first_commit}  •  Member since: {member_since}</text>
-
-  <!-- Month Labels -->
-{chr(10).join(month_svg)}
-
-  <!-- Day Labels -->
-  <text x="18" y="{start_y + 1 * (cell_size + cell_gap) + 9:.1f}" class="cal-label">Mon</text>
-  <text x="18" y="{start_y + 3 * (cell_size + cell_gap) + 9:.1f}" class="cal-label">Wed</text>
-  <text x="18" y="{start_y + 5 * (cell_size + cell_gap) + 9:.1f}" class="cal-label">Fri</text>
-
-  <!-- Heatmap Grid Cells -->
+  <!-- Rank Ring -->
   <g>
-{chr(10).join(cells_svg)}
-  </g>
-
-  <!-- Legend -->
-  <g transform="translate({width - 165}, {height - 24})">
-    <text x="0" y="9" class="cal-legend">Less</text>
-    <rect x="32" y="0" width="10" height="10" rx="2" fill="{t["cal_level0"]}"/>
-    <rect x="46" y="0" width="10" height="10" rx="2" fill="{t["cal_level1"]}"/>
-    <rect x="60" y="0" width="10" height="10" rx="2" fill="{t["cal_level2"]}"/>
-    <rect x="74" y="0" width="10" height="10" rx="2" fill="{t["cal_level3"]}"/>
-    <rect x="88" y="0" width="10" height="10" rx="2" fill="{t["cal_level4"]}"/>
-    <text x="105" y="9" class="cal-legend">More</text>
+    <circle cx="355" cy="85" r="40" fill="none" stroke="{ring_track}" stroke-width="6"/>
+    <circle class="rank-progress" cx="355" cy="85" r="40" fill="none" stroke="{ring_color}" stroke-width="6" stroke-linecap="round"/>
+    <text class="rank-text" x="355" y="93" text-anchor="middle">A</text>
   </g>
 </svg>
 """
-    return svg_content
+
+
+def build_top_langs_card(theme_key: str, stats: dict) -> str:
+    """
+    Generate the self-hosted Top Languages SVG card (matching github-readme-stats
+    /api/top-langs/?layout=compact&bg_color=00000000&hide_border=true&hide_title=true).
+    """
+    t = THEMES[theme_key]
+    width, height = 340, 170
+
+    langs = stats.get("top_languages") or [
+        {"name": "Go", "percentage": 38.87},
+        {"name": "JavaScript", "percentage": 25.13},
+        {"name": "Python", "percentage": 19.15},
+        {"name": "TypeScript", "percentage": 8.79},
+        {"name": "CSS", "percentage": 5.12},
+        {"name": "HTML", "percentage": 2.94},
+    ]
+
+    text_color = t["value"]
+    muted_color = t["key"]
+    bar_width = 300.0
+    bar_x = 20.0
+    bar_y = 22.0
+    bar_h = 10.0
+
+    # Stacked progress bar segments
+    segments_svg = []
+    curr_x = bar_x
+    total_pct = sum(l.get("percentage", 0) for l in langs) or 100.0
+    for l in langs:
+        name = l.get("name", "Other")
+        pct = l.get("percentage", 0.0)
+        seg_w = (pct / total_pct) * bar_width
+        color = LANGUAGE_COLORS.get(name, "#6eb0ff")
+        segments_svg.append(
+            f'    <rect x="{curr_x:.2f}" y="{bar_y}" width="{max(0.5, seg_w):.2f}" height="{bar_h}" fill="{color}"/>'
+        )
+        curr_x += seg_w
+
+    # Two-column compact language legend
+    legend_svg = []
+    col_x = [20, 175]
+    start_y = 58
+    row_gap = 28
+    for idx, l in enumerate(langs[:6]):
+        name = l.get("name", "Other")
+        pct = l.get("percentage", 0.0)
+        color = LANGUAGE_COLORS.get(name, "#6eb0ff")
+        cx = col_x[idx % 2]
+        cy = start_y + (idx // 2) * row_gap
+        legend_svg.append(
+            f'  <g transform="translate({cx}, {cy})">\n'
+            f'    <circle cx="5" cy="-4" r="5" fill="{color}"/>\n'
+            f'    <text class="lang-name" x="16" y="0">{escape(name)} <tspan class="lang-pct">{pct:.2f}%</tspan></text>\n'
+            f'  </g>'
+        )
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-labelledby="langs-title langs-desc">
+  <title id="langs-title">Most Used Languages ({t["name"]})</title>
+  <desc id="langs-desc">Top programming languages used across Ian Kimani's GitHub repositories.</desc>
+  <defs>
+    <clipPath id="bar-clip">
+      <rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="{bar_h}" rx="5"/>
+    </clipPath>
+  </defs>
+  <style>
+    .lang-name {{
+      font: 600 12.5px {SANS_FONT_FAMILY};
+      fill: {text_color};
+    }}
+    .lang-pct {{
+      font: 400 12px {SANS_FONT_FAMILY};
+      fill: {muted_color};
+    }}
+  </style>
+
+  <!-- Stacked Language Progress Bar -->
+  <g clip-path="url(#bar-clip)">
+{chr(10).join(segments_svg)}
+  </g>
+
+  <!-- Compact 2-Column Legend -->
+{chr(10).join(legend_svg)}
+</svg>
+"""
+
 
 def validate_and_write_svg(svg_content: str, target_path: Path):
     """Validate SVG XML structure and write atomically to target_path."""
@@ -541,19 +557,18 @@ def validate_and_write_svg(svg_content: str, target_path: Path):
     except ET.ParseError as e:
         raise ValueError(f"Generated SVG for {target_path} is invalid XML: {e}")
 
-    # Check for placeholder leaks
     for placeholder in ["{placeholders}", "None", "NaN", "undefined"]:
         if placeholder in svg_content:
             raise ValueError(f"Found forbidden value '{placeholder}' in SVG for {target_path}")
 
-    # Write atomically
     temp_path = target_path.with_suffix(".tmp")
     temp_path.write_text(svg_content, encoding="utf-8")
     temp_path.replace(target_path)
     print(f"Successfully generated and validated {target_path}")
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Build neofetch SVG cards.")
+    parser = argparse.ArgumentParser(description="Build neofetch and GitHub stats SVG cards.")
     parser.add_argument("--stats-file", default="cache/stats.json", help="Path to stats JSON file")
     parser.add_argument("--portrait-svg", default=PORTRAIT_SVG_DEFAULT,
                         help="Coloured ASCII portrait SVG to embed (default: portrait.svg)")
@@ -591,12 +606,12 @@ def main():
     light_card = build_terminal_card("light", stats, portrait_lines)
     validate_and_write_svg(light_card, out_dir / "light_mode.svg")
 
-    # Build Dark and Light Contribution Heatmaps
-    dark_cal = build_contributions_card("dark", stats)
-    validate_and_write_svg(dark_cal, out_dir / "contributions_dark.svg")
+    # Build Dark and Light GitHub Statistics & Top Languages Cards
+    validate_and_write_svg(build_stats_card("dark", stats), out_dir / "stats_dark.svg")
+    validate_and_write_svg(build_stats_card("light", stats), out_dir / "stats_light.svg")
+    validate_and_write_svg(build_top_langs_card("dark", stats), out_dir / "top_langs_dark.svg")
+    validate_and_write_svg(build_top_langs_card("light", stats), out_dir / "top_langs_light.svg")
 
-    light_cal = build_contributions_card("light", stats)
-    validate_and_write_svg(light_cal, out_dir / "contributions_light.svg")
 
 if __name__ == "__main__":
     main()

@@ -1,12 +1,12 @@
 <p align="center">
-  <code>junior software developer</code> • <code>kisumu, kenya</code> • <code>physicist by training</code>
+  <code>software developer</code> • <code>kisumu, kenya</code> • <code>physicist by training</code>
 </p>
 
 <p align="center">
   <a href="https://github.com/frihk">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg">
-      <img alt="Ian Kimani — junior software developer in Kisumu, Kenya. Go, JavaScript, Python, React, Next.js." src="light_mode.svg" width="900">
+      <img alt="Ian Kimani — Software developer in Kisumu, Kenya. Go, JavaScript, Python, React, Next.js." src="light_mode.svg" width="900">
     </picture>
   </a>
 </p>
@@ -14,8 +14,7 @@
 <p align="center">
   <a href="https://github.com/frihk"><strong>GitHub</strong></a> &bull;
   <a href="https://dev.to/frihk"><strong>dev.to</strong></a> &bull;
-  <a href="TODO_URL"><strong>LinkedIn</strong></a> &bull;
-  <a href="mailto:frihkian05@gmail.com"><strong>Email</strong></a>
+  <a href="https://www.linkedin.com/search/results/all/?keywords=Ian%20Kimani"><strong>LinkedIn (Ian Kimani)</strong></a>
   <br>
   <strong>Featured Projects:</strong>
   <a href="https://github.com/frihk/Detecto">Detecto</a> &bull;
@@ -25,13 +24,22 @@
   <a href="https://github.com/frihk?tab=repositories">All Repositories</a>
 </p>
 
-<h3 align="center">Contributions &amp; Milestones</h3>
+## 📈 Statistics
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="contributions_dark.svg">
-    <img alt="Ian Kimani's GitHub contribution graph and streak milestones" src="contributions_light.svg" width="900">
-  </picture>
+<br>
+<p align="left">
+  <a href="https://github.com/frihk" target="_blank">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="stats_dark.svg">
+      <img height="145em" src="stats_light.svg" alt="GitHub statistics">
+    </picture>
+  </a>
+  <a href="https://github.com/frihk" target="_blank">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="top_langs_dark.svg">
+      <img height="145em" src="top_langs_light.svg" alt="Top languages">
+    </picture>
+  </a>
 </p>
 
 <details>

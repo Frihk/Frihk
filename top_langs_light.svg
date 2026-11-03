@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 170" width="340" height="170" role="img" aria-labelledby="langs-title langs-desc">
+  <title id="langs-title">Most Used Languages (Light Mode)</title>
+  <desc id="langs-desc">Top programming languages used across Ian Kimani's GitHub repositories.</desc>
+  <defs>
+    <clipPath id="bar-clip">
+      <rect x="20.0" y="22.0" width="300.0" height="10.0" rx="5"/>
+    </clipPath>
+  </defs>
+  <style>
+    .lang-name {
+      font: 600 12.5px -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      fill: #0b2a5c;
+    }
+    .lang-pct {
+      font: 400 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      fill: #1f56c4;
+    }
+  </style>
+
+  <!-- Stacked Language Progress Bar -->
+  <g clip-path="url(#bar-clip)">
+    <rect x="20.00" y="22.0" width="116.61" height="10.0" fill="#00ADD8"/>
+    <rect x="136.61" y="22.0" width="75.39" height="10.0" fill="#f1e05a"/>
+    <rect x="212.00" y="22.0" width="57.45" height="10.0" fill="#3572A5"/>
+    <rect x="269.45" y="22.0" width="26.37" height="10.0" fill="#3178c6"/>
+    <rect x="295.82" y="22.0" width="15.36" height="10.0" fill="#563d7c"/>
+    <rect x="311.18" y="22.0" width="8.82" height="10.0" fill="#e34c26"/>
+  </g>
+
+  <!-- Compact 2-Column Legend -->
+  <g transform="translate(20, 58)">
+    <circle cx="5" cy="-4" r="5" fill="#00ADD8"/>
+    <text class="lang-name" x="16" y="0">Go <tspan class="lang-pct">38.87%</tspan></text>
+  </g>
+  <g transform="translate(175, 58)">
+    <circle cx="5" cy="-4" r="5" fill="#f1e05a"/>
+    <text class="lang-name" x="16" y="0">JavaScript <tspan class="lang-pct">25.13%</tspan></text>
+  </g>
+  <g transform="translate(20, 86)">
+    <circle cx="5" cy="-4" r="5" fill="#3572A5"/>
+    <text class="lang-name" x="16" y="0">Python <tspan class="lang-pct">19.15%</tspan></text>
+  </g>
+  <g transform="translate(175, 86)">
+    <circle cx="5" cy="-4" r="5" fill="#3178c6"/>
+    <text class="lang-name" x="16" y="0">TypeScript <tspan class="lang-pct">8.79%</tspan></text>
+  </g>
+  <g transform="translate(20, 114)">
+    <circle cx="5" cy="-4" r="5" fill="#563d7c"/>
+    <text class="lang-name" x="16" y="0">CSS <tspan class="lang-pct">5.12%</tspan></text>
+  </g>
+  <g transform="translate(175, 114)">
+    <circle cx="5" cy="-4" r="5" fill="#e34c26"/>
+    <text class="lang-name" x="16" y="0">HTML <tspan class="lang-pct">2.94%</tspan></text>
+  </g>
+</svg>
